@@ -1,0 +1,24 @@
+<div >
+    <h1 class="text-center">Filters</h1>
+    <mat-divider></mat-divider>
+    <div class="flex items-start space-x-4">
+        <h2 class="text-center">Types</h2>
+        <mat-selection-list [(ngModel)]="data.selectedTypes" [multiple]="true" class="w-1/2">
+            @for (type of data.types; track $index) {
+              <mat-list-option [value]="type">{{type}}</mat-list-option>
+            }
+        </mat-selection-list>
+        <mat-divider vertical class="h-auto border-gray-300"></mat-divider>
+        <h2 class="text-center">Brands</h2>
+        <mat-selection-list [(ngModel)]="data.selectedBrands" [multiple]="true" class="w-1/2">
+            @for (brand of data.brands; track $index) {
+              <mat-list-option [value]="brand">{{brand}}</mat-list-option>
+            }
+        </mat-selection-list>
+    </div>
+    <div class="flex justify-end p-4">
+        <button mat-flat-button (click)="filter()">
+            Apply Filters
+        </button>    
+    </div>
+</div>

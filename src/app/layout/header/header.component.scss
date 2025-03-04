@@ -1,0 +1,17 @@
+.custom-badge .mat-icon{
+    width: 30px;
+    height: 30px;
+    font-size: 33px;
+}
+
+.custom-badge .mat-badge-content{
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+}
+
+a{
+    &.active{
+        color:blue
+    }
+}
