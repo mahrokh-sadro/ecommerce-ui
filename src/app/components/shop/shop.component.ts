@@ -17,7 +17,9 @@ import { RouterLink } from '@angular/router';
 
 
 import {ProductService} from '../../services/product.service'
-
+import { CartService } from '../../services/cart.service';
+import { Product } from '../../models/product';
+import { Cart } from '../../models/cart';
 
 @Component({
   selector: 'app-shop',
@@ -47,7 +49,6 @@ export class ShopComponent {
     selectedBrands:string[]=[];
     selectedTypes:string[]=[];
     private productService=inject(ProductService);
-
     sortOptions=[
       {name:'Price: Low to high' , value:'priceAsc'},
       {name:'Price: High to low' , value:'priceDes'},
@@ -55,11 +56,21 @@ export class ShopComponent {
       {name:'Name: Descending' , value:'nameDsc'},
     ] ;
     selectedSortValue:string=""; 
- 
+    private cartService=inject(CartService);
+    cart: Cart | null = null;
+
+
     ngOnInit() {
       this.getProducts();
       this.getTypes();
       this.getBrands();
+      const cartId = localStorage.getItem('cartId');
+      // if (cartId) {
+      //   this.cartService.getCart(cartId).subscribe((cart) => {
+      //     this.cart = cart; // Assign the cart data
+      //     console.log('Fetched cart:', this.cart);
+      //   });
+      // }
     }
 
     ngAfterViewInit() {
@@ -157,6 +168,9 @@ export class ShopComponent {
       // this.updatePaginatedData();
     }
 
+    addItemToCart(product:Product){
+       this.cartService.addItemToCart(product);
+    }
 }
 
 
