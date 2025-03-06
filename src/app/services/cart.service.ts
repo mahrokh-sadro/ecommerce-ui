@@ -34,7 +34,7 @@ export class CartService {
   getCart(id:string){
     return this.http.get<Cart>(this.baseUrl+"cart/"+id).pipe(
       map((cart:any)=>{
-        // this.cart.set(cart);
+        this.cart.set(cart);
         return cart;
       })
     )
@@ -43,8 +43,7 @@ export class CartService {
   setCart(cart:Cart){
     return this.http.post<Cart>("http://localhost:5001/api/cart",cart).subscribe({
       next:data=>{
-        // this.cart.set(data);
-        localStorage.setItem('cartId',cart.id);
+        this.cart.set(data);
       },
       error:()=>{}
     })
@@ -73,10 +72,12 @@ export class CartService {
   }
 
   createCart(){
-    return {
+    const newCart= {
       id:nanoid(),
       cartItems:[]
     }
+    localStorage.setItem('cartId',newCart.id);
+    return newCart;
   }
 
   mapProductToItem(product:Product,quantity:number,cartId:string){
