@@ -1,10 +1,23 @@
 import { Component,inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {MatButton} from '@angular/material/button';
+import {MatCard} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import {MatIcon} from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+
+
 import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-product-details',
-  imports: [],
+  imports: [
+    MatButton,
+    MatCard,
+    MatCardModule,
+    MatIcon,
+    CommonModule
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })

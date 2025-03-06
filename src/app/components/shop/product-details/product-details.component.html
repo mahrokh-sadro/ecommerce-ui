@@ -1,1 +1,33 @@
-<p>product-details works!</p>
+@if(product){
+    <div class="grid grid-cols-2 gap-4">
+        <div class="p-8 flex items-center justify-center">
+            <mat-card class="example-card" appearance="outlined">
+                <img
+                  mat-card-image
+                  src="{{'images/'+product.image}}"
+                  alt="{{product.image}}"
+                />
+            </mat-card>
+    
+        </div>
+        <div class="p-8 flex flex-col justify-start">
+            <h1 class="text-2xl font-semibold">{{product.name}}</h1>
+            <h2 class="text-lg font-bold">{{product.price | currency}}</h2>
+            <div class="mt-4 flex space-x-4">
+                <button mat-button>add to cart</button>
+
+                <button mat-stroked-button>quantity</button>
+            </div>
+
+            <p class="mt-4 text-gray-600 font-light">{{product.description}}</p>  
+
+            <div class="flex flex-col space-y-2">
+                <h3 class="text-base font-medium text-gray-800">Brand: <span class="font-normal">{{product.brand}}</span></h3>
+                <h3 class="text-base font-medium text-gray-800">Type: <span class="font-normal">{{product.type}}</span></h3>
+              </div>
+              
+
+        </div>
+       
+    </div>
+}
