@@ -64,13 +64,10 @@ export class ShopComponent {
       this.getProducts();
       this.getTypes();
       this.getBrands();
-      const cartId = localStorage.getItem('cartId');
-      // if (cartId) {
-      //   this.cartService.getCart(cartId).subscribe((cart) => {
-      //     this.cart = cart; // Assign the cart data
-      //     console.log('Fetched cart:', this.cart);
-      //   });
-      // }
+     
+
+      
+    
     }
 
     ngAfterViewInit() {
