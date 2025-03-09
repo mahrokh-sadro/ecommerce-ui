@@ -15,29 +15,13 @@ export class CartService {
   baseUrl=environment.apiUrl;
   private http=inject(HttpClient);
   cart=signal<Cart| null>(null);
+  totalCartItems=computed(()=>{
+    return this.cart()?.cartItems?.reduce((total,item)=>total+item.quantity,0) || 0;
+  })
 
   constructor() {
-    // this.loadCart();
   }
-  // totalQuantity = compute(() => {
-  //   const cart = this.cart();
-  //   return cart?.cartItems?.reduce((total, item) => total + item.quantity, 0) || 0;
-  // });
-  totalCartItems=computed(()=>{
-     return this.cart()?.cartItems?.reduce((total,item)=>total+item.quantity,0) || 0;
-  })
-  
-  // loadCart() {
-  //   const cartId=localStorage.getItem('cartId');
-  //   console.log('cartId',cartId)
-  //   if(cartId){
-  //      this.getCart(cartId);
-  //   }
-  //   else{
-  //      //do we need to create??
-  //   }
-  // }
-  
+
   getCart(id:string){
     return this.http.get<Cart>("http://localhost:5001/api/cart/"+id).pipe(
       map((cart:any)=>{
@@ -51,7 +35,6 @@ export class CartService {
     return this.http.post<Cart>("http://localhost:5001/api/cart",cart).subscribe({
       next:data=>{
         this.cart.set(data);
-        console.log('cart.set(data)',data)
       },
       error:()=>{}
     })
@@ -59,20 +42,15 @@ export class CartService {
 
   addItemToCart(product:Product,quantity:number=1){
     const cart = this.cart() ?? this.createCart();
-
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==product.id);
-    
     if(index!=-1){
-      console.log('cart',cart)
       cart.cartItems[index].quantity += quantity
     }
     else{
       const newItem=this.mapProductToItem(product,quantity,cart.id) ;
       cart.cartItems?.push(newItem);
     }
-    console.log(cart)
     this.setCart(cart);
-
   }
 
   createCart(){
@@ -95,6 +73,50 @@ export class CartService {
       image:product.image,
     }
   }
+
+  decreaseItemQuantity(cartItem:CartItem){
+     const cart=this.cart();
+     if(!cart){
+      return;
+     }
+     const index=cart.cartItems?.findIndex((item:any)=>item.productId==cartItem.productId);
+     if(index!=-1){
+       cart.cartItems[index].quantity-=1; 
+     }
+     this.setCart(cart);
+  }
+
+  removeItemFromCart(cartItem:CartItem){
+    const cart=this.cart();
+    if(!cart){
+      return;
+    }
+    const index=cart.cartItems?.findIndex((item:any)=>item.productId==cartItem.productId);
+    console.log(index)
+    if(index!=-1){
+      cart.cartItems.splice(index,1);
+    }
+    this.setCart(cart);
+  }
+
+  increamentItem(cartItem:CartItem){
+    const cart = this.cart();
+    if(!cart) return;
+    const index=cart.cartItems?.findIndex((item:any)=>item.productId==cartItem.productId);
+    if(index!=-1){
+      cart.cartItems[index].quantity += 1
+    }
+    this.setCart(cart);
+  }
+
+    // deleteCart() {
+  //   this.http.delete(this.baseUrl  + 'cart?id=' + this.cart()?.id).subscribe({
+  //     next: () => {
+  //       localStorage.removeItem('cart_id');
+  //       this.cart.set(null);
+  //     }
+  //   })
+  // }
 }
 
 
