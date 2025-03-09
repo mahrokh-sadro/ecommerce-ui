@@ -56,7 +56,7 @@ export class ShopComponent {
       {name:'Name: Descending' , value:'nameDsc'},
     ] ;
     selectedSortValue:string=""; 
-    private cartService=inject(CartService);
+    cartService=inject(CartService);
     cart: Cart | null = null;
 
 
@@ -165,9 +165,9 @@ export class ShopComponent {
       // this.updatePaginatedData();
     }
 
-    addItemToCart(product:Product){
-       this.cartService.addItemToCart(product);
-    }
+    // addItemToCart(product:Product){
+    //    this.cartService.addItemToCart(product);
+    // }
 }
 
 

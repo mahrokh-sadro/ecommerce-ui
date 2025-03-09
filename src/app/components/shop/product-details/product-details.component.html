@@ -14,16 +14,28 @@
             <h1 class="text-2xl font-semibold">{{product.name}}</h1>
             <h2 class="text-lg font-bold">{{product.price | currency}}</h2>
             <div class="mt-4 flex space-x-4">
-                <button mat-button>add to cart</button>
+                <button mat-flat-button>add to cart</button>
 
-                <button mat-stroked-button>quantity</button>
+                <!-- <button mat-stroked-button>quantity</button> -->
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <button mat-stroked-button (click)="decreaseQuantity()">
+                        <mat-icon>arrow_upward</mat-icon>
+                    </button>                       
+                    <mat-button-toggle value="italic" [disabled]="true">Italic</mat-button-toggle>
+                    <button mat-stroked-button (click)="increaseQuantity()">
+                        <mat-icon>arrow_upward</mat-icon>
+                    </button>                  
+                </mat-button-toggle-group>
+                  
+                  
+                  
             </div>
 
             <p class="mt-4 text-gray-600 font-light">{{product.description}}</p>  
 
             <div class="flex flex-col space-y-2">
-                <h3 class="text-base font-medium text-gray-800">Brand: <span class="font-normal">{{product.brand}}</span></h3>
-                <h3 class="text-base font-medium text-gray-800">Type: <span class="font-normal">{{product.type}}</span></h3>
+                <h3 class="text-base font-medium">Brand: <span class="font-normal">{{product.brand}}</span></h3>
+                <h3 class="text-base font-medium">Type: <span class="font-normal">{{product.type}}</span></h3>
               </div>
               
 

@@ -5,6 +5,10 @@ import {MatCard} from '@angular/material/card';
 import { MatCardModule } from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // <-- Import this
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 import { ProductService } from '../../../services/product.service';
@@ -16,7 +20,11 @@ import { ProductService } from '../../../services/product.service';
     MatCard,
     MatCardModule,
     MatIcon,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule, 
+    MatInputModule ,
+    MatButtonToggleModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
@@ -37,6 +45,18 @@ export class ProductDetailsComponent {
              console.log(this.product)
            }
         })
+      }
+    }
+
+    quantity = 1;
+
+    increaseQuantity() {
+      this.quantity++;
+    }
+
+    decreaseQuantity() {
+      if (this.quantity > 1) {
+        this.quantity--;
       }
     }
 }
