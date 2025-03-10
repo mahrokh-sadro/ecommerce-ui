@@ -18,6 +18,32 @@ export class CartService {
   totalCartItems=computed(()=>{
     return this.cart()?.cartItems?.reduce((total,item)=>total+item.quantity,0) || 0;
   })
+  taxRate:number = 0.13;
+  shipping:number=5;
+  discount:number=0;
+  orderSummary=computed(()=>{
+    const cart=this.cart();
+    if (!cart) {
+      return { subTotal: 0, tax: 0, shipping: this.shipping, total: 0 };
+    }
+    let subTotal = cart.cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) ?? 0;
+    let tax = subTotal * this.taxRate;
+    let total = parseFloat((subTotal + tax + this.shipping).toFixed(2));
+    return{
+      subTotal,
+      tax,
+      shipping: this.shipping,
+      discount:this.discount,
+      total
+    }
+  })
+  // getTotalCartPrice(){
+  //   const cart=this.cart();
+  //   if(!cart) return 0;
+  //   let subTotal=this.getartSubTotal();
+  //   let total=(subTotal*(this.taxRate+1)+this.shipping).toFixed(2);
+  //   return total;
+  // }
 
   constructor() {
   }
@@ -41,6 +67,9 @@ export class CartService {
   }
 
   addItemToCart(product:Product,quantity:number=1){
+    console.log(product)
+    console.log(quantity)
+
     const cart = this.cart() ?? this.createCart();
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==product.id);
     if(index!=-1){
@@ -117,6 +146,9 @@ export class CartService {
   //     }
   //   })
   // }
+
+  
+ 
 }
 
 

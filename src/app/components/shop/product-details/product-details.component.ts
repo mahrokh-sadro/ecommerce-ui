@@ -9,9 +9,11 @@ import { FormsModule } from '@angular/forms'; // <-- Import this
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 import { ProductService } from '../../../services/product.service';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -24,7 +26,9 @@ import { ProductService } from '../../../services/product.service';
     FormsModule,
     MatFormFieldModule, 
     MatInputModule ,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
@@ -34,29 +38,28 @@ export class ProductDetailsComponent {
     private productService=inject(ProductService);
     productId:string | null="";
     product:any;
+    quantityOptions:number[]=[];
+    cartService=inject(CartService);
+    selectedQuantity = 1;
+    
+    constructor(){
+      for(let i=0;i<30;i++){
+        this.quantityOptions[i]=i+1;
+      }
+    }
 
     ngOnInit(){
       this.productId=this.route.snapshot.paramMap.get('id');
-      console.log('productId',this.productId);
+      // console.log('productId',this.productId);
       if(this.productId){
         this.productService.getProductById(+this.productId).subscribe({
            next:(data:any)=>{
              this.product=data;
-             console.log(this.product)
+            //  console.log(this.product)
            }
         })
       }
     }
 
-    quantity = 1;
-
-    increaseQuantity() {
-      this.quantity++;
-    }
-
-    decreaseQuantity() {
-      if (this.quantity > 1) {
-        this.quantity--;
-      }
-    }
+    
 }

@@ -35,4 +35,6 @@ export class CartComponent {
   decrement(item:any){
      this.cartService.decreaseItemQuantity(item);
   }
+
+
 }
