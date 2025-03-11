@@ -23,6 +23,5 @@ export class HeaderComponent {
 
    getCartItems(){
      return this.cartService.totalCartItems();
-     console.log(this.cartService.totalCartItems)
    }
 }
