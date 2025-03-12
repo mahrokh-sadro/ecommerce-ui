@@ -10,9 +10,33 @@
          <a [matBadge]="getCartItems()" matBadgeSize="large" class="custom-badge" routerLink="/cart">
              <mat-icon >shopping_cart</mat-icon>
          </a>   
-         <button mat-stroked-button routerLink="user/login">Login</button>
-         <button mat-stroked-button routerLink="user/register">Register</button>
+         @if(userService.loggedInUser()){
+            <!-- <button mat-stroked-button (click)="logout()">Logout</button> -->
+             <button mat-button [matMenuTriggerFor]="menu" >
+                <mat-icon>arrow_downward</mat-icon>
+                <span>Hello, {{userService.loggedInUser()?.firstName}}</span>
+             </button>
+         }@else{
+            <button mat-stroked-button routerLink="user/login">Login</button>
+            <button mat-stroked-button routerLink="user/register">Register</button>
+         }
 
     </div>
  </div>
 </header>
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="cart">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>My Cart</span>
+    </button>
+    <button mat-menu-item routerLink="">
+      <mat-icon>list_alt</mat-icon>
+      <span>My Orders</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>

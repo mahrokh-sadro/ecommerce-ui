@@ -174,9 +174,7 @@ export class ShopComponent {
 @Component({
   imports: [
     CommonModule,
-    MatCard,
     MatCardModule,
-    MatIcon,
     MatButton,
     MatDividerModule,
     MatListModule,

@@ -21,7 +21,6 @@ import { CartService } from '../../../services/cart.service';
     MatButton,
     MatCard,
     MatCardModule,
-    MatIcon,
     CommonModule,
     FormsModule,
     MatFormFieldModule, 

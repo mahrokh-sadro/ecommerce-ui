@@ -1,7 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable,inject,signal } from '@angular/core';
 
 import { Address, User } from '../models/user';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,13 @@ export class UserService {
     return this.http.post<User>(this.baseUrl+'login?',values,{params,withCredentials:true});
   }
 
-  register(values:any){
-    return this.http.post(this.baseUrl+"user/register",values);
+  register(values: any) {
+    return this.http.post(this.baseUrl + 'user/register', values).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Registration error:', error); 
+        return throwError(() => error.error.errors); 
+      })
+    );
   }
 
   updateAddress(address:Address){
@@ -28,15 +34,28 @@ export class UserService {
   }
 
   getUserInfo(){
-    return this.http.get<User>(this.baseUrl+"user/user-info",{withCredentials:true}).subscribe({
-      next:data=>{
-        this.loggedInUser.set(data)
-        console.log(data)
-      }
-    })
+    return this.http.get<User>(this.baseUrl+"user/user-info",{withCredentials:true}).pipe(
+      map(user=>{
+        this.loggedInUser.set(user);
+        return user;
+      }),
+      catchError((error) => {
+        console.error('getUserInfo failed', error); 
+        throw error;
+      })
+    )
   } 
-
-  logout(){
-    return this.http.post(this.baseUrl+"user/logout",{},{withCredentials:true});
+  
+  logout() {
+    return this.http.post(this.baseUrl + 'user/logout', {}, { withCredentials: true }).pipe(
+      map(() => {
+        this.loggedInUser.set(null); 
+      }),
+      catchError((error) => {
+        console.error('Logout failed', error); 
+        throw error; 
+      })
+    );
   }
+  
 }
