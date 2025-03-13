@@ -58,4 +58,7 @@ export class UserService {
     );
   }
   
+  getAuthStatus(){
+    return this.http.get<Boolean>(this.baseUrl+'user/auth-status');
+  }
 }

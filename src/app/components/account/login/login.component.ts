@@ -30,19 +30,26 @@ export class LoginComponent {
   private userService=inject(UserService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+  returnUrl = '';
 
   hidePassword = true;
   loginForm=this.formBuilder.group({
      email:[''],
      password:['']
   });
-
+  constructor() {
+    const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
+    if (url) {
+      console.log(url)
+      this.returnUrl = url;
+    }
+  }
   onSubmit(){
     // console.log(this.loginForm.value)
     this.userService.login(this.loginForm.value).subscribe({
        next:()=>{
          this.userService.getUserInfo().subscribe();
-         this.router.navigateByUrl("/")
+         this.router.navigateByUrl(this.returnUrl)
        }
     })
   }

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {MatBadge} from '@angular/material/badge';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
 
 
@@ -25,6 +25,7 @@ import { UserService } from '../../services/user.service';
 export class HeaderComponent {
    private cartService=inject(CartService);
    userService=inject(UserService);
+   private router=inject(Router);
 
    getCartItems(){
      return this.cartService.totalCartItems();
@@ -32,5 +33,6 @@ export class HeaderComponent {
 
    logout(){
      this.userService.logout().subscribe();
+     this.router.navigateByUrl('/user/login');
    }
 }
