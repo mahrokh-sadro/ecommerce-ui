@@ -45,7 +45,6 @@ export class LoginComponent {
     }
   }
   onSubmit(){
-    // console.log(this.loginForm.value)
     this.userService.login(this.loginForm.value).subscribe({
        next:()=>{
          this.userService.getUserInfo().subscribe();
