@@ -1,5 +1,5 @@
 import { Component,inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
@@ -39,10 +39,10 @@ export class RegisterComponent {
    errors:any;
 
    form=this.formBuilder.group({
-    firstName:[''],
-    lastName:[''],
-    email:[''],
-    password:['']
+    firstName:['',Validators.required],
+    lastName:['',Validators.required],
+    email:['',[Validators.required,Validators.email]],
+    password:['',Validators.required]
    })
 
    onSubmit(){

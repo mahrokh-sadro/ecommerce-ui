@@ -5,29 +5,45 @@
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>First Name</mat-label>
                 <input type="text" formControlName="firstName" matInput />
+                <mat-error *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched">
+                    First name is required.
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Last Name</mat-label>
                 <input type="text" formControlName="lastName" matInput />
+                <mat-error *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
+                    Last name is required.
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Email</mat-label>
                 <input type="email" formControlName="email" matInput />
+                <mat-error *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">
+                    Email is required.
+                </mat-error>
+                <mat-error *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">
+                    Please enter a valid email.
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Password</mat-label>
                 <input type="password" formControlName="password" matInput />
+                <mat-error *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">
+                    Password is required.
+                </mat-error>
             </mat-form-field>
-            <mat-list *ngIf="errors.length" >
+
+            <mat-list *ngIf="errors?.length" >
                 <mat-list-item *ngFor="let message of errors">
                   <span [matTooltip]="message[1]" class="text-sm text-red-600">{{ message[1] }}</span>
                 </mat-list-item>
             </mat-list>
             <div class="example-button-row w-full">
-                <button mat-flat-button class="w-full">Register</button>
+                <button mat-flat-button class="w-full"  [disabled]="form.invalid">Register</button>
             </div>
         </form>
     </mat-card>
