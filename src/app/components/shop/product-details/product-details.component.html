@@ -1,32 +1,46 @@
 @if(product){
-    <div class="grid grid-cols-2 gap-4">
-        <div class="p-8 flex items-center justify-center">
-            <mat-card class="example-card" appearance="outlined">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 max-w-screen-lg mx-auto">
+        
+        <!-- Product Image -->
+        <div class="flex items-center justify-center">
+            <mat-card class="shadow-lg border rounded-lg p-4">
                 <img
                   mat-card-image
+                  class="rounded-lg object-cover w-80 h-80"
                   src="{{'images/'+product.image}}"
                   alt="{{product.image}}"
                 />
             </mat-card>
-    
         </div>
-        <div class="p-8 flex flex-col justify-start">
-            <h1 class="text-2xl font-semibold">{{product.name}}</h1>
-            <h2 class="text-lg font-bold">{{product.price | currency}}</h2>
-            <div class="mt-4 flex space-x-4">
-                <button mat-flat-button (click)="cartService.addItemToCart(product,mode.value)">add to cart</button>
-                <mat-form-field>
+
+        <!-- Product Details -->
+        <div class="flex flex-col gap-4">
+            <h1 class="text-2xl font-semibold text-gray-800">{{product.name}}</h1>
+            <h2 class="text-lg font-bold text-blue-600">{{product.price | currency}}</h2>
+
+            <!-- Quantity & Add to Cart -->
+            <div class="flex gap-4 items-center">
+                <mat-form-field appearance="fill" class="w-32 h-16">
                     <mat-label>Quantity</mat-label>
                     <mat-select #mode value="selectedQuantity">
-                      <mat-option [value]="q"  *ngFor="let q of quantityOptions">{{q}}</mat-option>
+                        <mat-option *ngFor="let q of quantityOptions" [value]="q">{{q}}</mat-option>
                     </mat-select>
-                </mat-form-field>                
+                </mat-form-field>  
+
+                <button mat-flat-button color="primary" class="px-6 py-2 text-white rounded-md" 
+                        (click)="cartService.addItemToCart(product,mode.value)">
+                    Add to Cart
+                </button>
             </div>
-            <p class="mt-4 text-gray-600 font-light">{{product.description}}</p>  
-            <div class="flex flex-col space-y-2">
+
+            <!-- Description -->
+            <p class="text-gray-600 leading-relaxed">{{product.description}}</p>  
+
+            <!-- Additional Info -->
+            <div class="flex flex-col gap-1 text-gray-700">
                 <h3 class="text-base font-medium">Brand: <span class="font-normal">{{product.brand}}</span></h3>
                 <h3 class="text-base font-medium">Type: <span class="font-normal">{{product.type}}</span></h3>
-              </div>             
+            </div>             
         </div>
     </div>
 }

@@ -14,7 +14,7 @@
  </div>
  
  <div class="grid grid-cols-5 gap-4">
-     <mat-card class="example-card" appearance="outlined" *ngFor="let product of paginatedProducts" routerLink="{{product.id}}">
+     <mat-card class="example-card cursor-pointer" appearance="outlined" *ngFor="let product of paginatedProducts" routerLink="{{product.id}}">
          <img
            mat-card-image
            src="{{'images/'+product.image}}"
