@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^19.1.0",
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
+    "@stripe/stripe-js": "^6.0.0",
     "@tailwindcss/postcss": "^4.0.9",
     "nanoid": "^5.1.2",
     "postcss": "^8.5.3",
