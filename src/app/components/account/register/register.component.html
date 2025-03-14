@@ -1,26 +1,29 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100 flex-col gap-4">
-    <mat-card class="w-full max-w-md p-6 shadow-lg">
-        <h2 class="text-xl font-bold text-center mb-4">Register</h2>
+<div class="flex items-center justify-center min-h-screen flex-col gap-4">
+    <mat-card class="w-full max-w-md p-6 shadow-lg rounded-lg bg-white">
+        <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Register</h2>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>First Name</mat-label>
-                <input type="text" formControlName="firstName" matInput />
+            <mat-form-field appearance="fill" class="w-full mb-4">
+                <mat-label class="text-sm font-medium">First Name</mat-label>
+                <input type="text" formControlName="firstName" matInput 
+                    class="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
                 <mat-error *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched">
                     First name is required.
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Last Name</mat-label>
-                <input type="text" formControlName="lastName" matInput />
+            <mat-form-field appearance="fill" class="w-full mb-4">
+                <mat-label class="text-sm font-medium">Last Name</mat-label>
+                <input type="text" formControlName="lastName" matInput 
+                    class="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
                 <mat-error *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
                     Last name is required.
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Email</mat-label>
-                <input type="email" formControlName="email" matInput />
+            <mat-form-field appearance="fill" class="w-full mb-4">
+                <mat-label class="text-sm font-medium">Email</mat-label>
+                <input type="email" formControlName="email" matInput 
+                    class="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
                 <mat-error *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">
                     Email is required.
                 </mat-error>
@@ -29,23 +32,26 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Password</mat-label>
-                <input type="password" formControlName="password" matInput />
+            <mat-form-field appearance="fill" class="w-full mb-6">
+                <mat-label class="text-sm font-medium">Password</mat-label>
+                <input type="password" formControlName="password" matInput 
+                    class="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" />
                 <mat-error *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">
                     Password is required.
                 </mat-error>
             </mat-form-field>
 
-            <mat-list *ngIf="errors?.length" >
+            <mat-list *ngIf="errors?.length">
                 <mat-list-item *ngFor="let message of errors">
-                  <span [matTooltip]="message[1]" class="text-sm text-red-600">{{ message[1] }}</span>
+                    <span [matTooltip]="message[1]" class="text-sm text-red-600">{{ message[1] }}</span>
                 </mat-list-item>
             </mat-list>
+
             <div class="example-button-row w-full">
-                <button mat-flat-button class="w-full"  [disabled]="form.invalid">Register</button>
+                <button mat-flat-button class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400" [disabled]="form.invalid">
+                    Register
+                </button>
             </div>
         </form>
     </mat-card>
-
 </div>

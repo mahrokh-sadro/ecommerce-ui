@@ -20,6 +20,7 @@ import {ProductService} from '../../services/product.service'
 import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
 import { Cart } from '../../models/cart';
+import { LoadingIconComponent } from '../../loading-icon/loading-icon.component';
 
 @Component({
   selector: 'app-shop',
@@ -33,7 +34,8 @@ import { Cart } from '../../models/cart';
     MatListModule,
     MatPaginatorModule,
     MatPaginator, 
-    RouterLink
+    RouterLink,
+    LoadingIconComponent
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
@@ -58,16 +60,12 @@ export class ShopComponent {
     selectedSortValue:string=""; 
     cartService=inject(CartService);
     cart: Cart | null = null;
-
+    isLoading:boolean=false;
 
     ngOnInit() {
       this.getProducts();
       this.getTypes();
       this.getBrands();
-     
-
-      
-    
     }
 
     ngAfterViewInit() {
@@ -87,12 +85,17 @@ export class ShopComponent {
     }
 
     getProducts(brands?:string[],types?:string[]){
+      this.isLoading=true;
       this.productService.getProducts().subscribe({
         next:(data:any)=>{
           this.products=data;
           this.updatePaginatedProducts();
+          this.isLoading=false;
         },
-        error:(error:any)=>console.log(error)
+        error:(error:any)=>{
+          console.log(error);
+          this.isLoading=false;
+        }
       })
     }
 
@@ -159,15 +162,9 @@ export class ShopComponent {
 
 
     handlePageEvent(event: PageEvent) {
-      console.log(event)
-      // this.pageSize = event.pageSize;
-      // this.currentPage = event.pageIndex;
-      // this.updatePaginatedData();
+
     }
 
-    // addItemToCart(product:Product){
-    //    this.cartService.addItemToCart(product);
-    // }
 }
 
 
@@ -187,22 +184,15 @@ export class FilterDialogComponent {
  
   private dialogRef = inject(MatDialogRef<FilterDialogComponent>);
   data = inject(MAT_DIALOG_DATA);
-  // selectedBrands: string[] = this.data.selectedBrands;
-  // selectedTypes: string[] = this.data.selectedTypes;
 
   ngOnInit() {
   }
 
-  // Method to handle changes in the form
   onCheckboxChange(type: number): void {
  
   }
 
-  // Method to save changes
   filter(): void {
-    // console.log('filter')
-    // console.log(this.selectedBrands) ;
-    // console.log(this.selectedTypes) ;
     this.dialogRef.close(this.data);
   }
 

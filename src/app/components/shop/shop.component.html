@@ -1,42 +1,47 @@
-
-<div class="flex flex-col gap-3">
-   <div class="flex justify-end">
-        <button mat-stroked-button (click)="openFilterDialog()">
-            <mat-icon>filter_list</mat-icon>
-            Filters
-        </button>
-        <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sort</button>
-   </div>
+<div *ngIf="isLoading" class="flex justify-center items-center min-h-screen">
+  <app-loading-icon ></app-loading-icon>
 </div>
 
-<div class="grid grid-cols-5 gap-4">
-    <mat-card class="example-card" appearance="outlined" *ngFor="let product of paginatedProducts" routerLink="{{product.id}}">
-        <img
-          mat-card-image
-          src="{{'images/'+product.image}}"
-          alt="{{product.image}}"
-        />
-        <mat-card-content>
-          <h2 class="">{{product.name}}</h2>
-          <p class="font-light">{{product.price | currency}}</p>
-        </mat-card-content>
-         <mat-card-actions (click)="$event.stopPropagation()">
-            <button mat-stroked-button class="w-full" (click)="cartService.addItemToCart(product)">
-               <mat-icon>add_shopping_cart</mat-icon>
-               Add to cart
-            </button>
-        </mat-card-actions>
-    </mat-card>
-    <!-- Add more mat-cards here as needed -->
+<div *ngIf="!isLoading">
+  <div class="flex flex-col gap-4 mb-2">
+    <div class="flex justify-end  gap-2">
+         <button mat-stroked-button (click)="openFilterDialog()">
+             <mat-icon>filter_list</mat-icon>
+             Filters
+         </button>
+         <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sort</button>
+    </div>
+ </div>
+ 
+ <div class="grid grid-cols-5 gap-4">
+     <mat-card class="example-card" appearance="outlined" *ngFor="let product of paginatedProducts" routerLink="{{product.id}}">
+         <img
+           mat-card-image
+           src="{{'images/'+product.image}}"
+           alt="{{product.image}}"
+         />
+         <mat-card-content>
+           <h2 class="">{{product.name}}</h2>
+           <p class="font-light">{{product.price | currency}}</p>
+         </mat-card-content>
+          <mat-card-actions (click)="$event.stopPropagation()">
+             <button mat-stroked-button class="w-full" (click)="cartService.addItemToCart(product)">
+                <mat-icon>add_shopping_cart</mat-icon>
+                Add to cart
+             </button>
+         </mat-card-actions>
+     </mat-card>
+     <!-- Add more mat-cards here as needed -->
+ </div>
+ <mat-paginator
+   [length]="products?.length"
+   [pageSize]="pageSize"
+   [showFirstLastButtons]="true"
+   [pageSizeOptions]="[5, 10, 15]"
+   (page)="onPageChange($event)"
+   aria-label="Select page">
+ </mat-paginator>
 </div>
-<mat-paginator
-  [length]="products?.length"
-  [pageSize]="pageSize"
-  [showFirstLastButtons]="true"
-  [pageSizeOptions]="[5, 10, 15]"
-  (page)="onPageChange($event)"
-  aria-label="Select page">
-</mat-paginator>
 
 
 

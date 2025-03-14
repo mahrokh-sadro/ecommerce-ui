@@ -5,14 +5,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router'; 
 
 import { CartService } from '../../services/cart.service';
-
+import { OrderSummaryComponent } from '../../order-summary/order-summary.component'; 
 @Component({
   selector: 'app-cart',
   imports: [
     CommonModule,
     MatCardModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    OrderSummaryComponent  
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'

@@ -1,0 +1,32 @@
+<div class="bg-white shadow-lg rounded-lg p-6 w-full">
+    <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+    
+    <div class="flex justify-between border-b py-2">
+      <span>Subtotal</span>
+      <span class="font-semibold">${{ cartService.orderSummary().subTotal.toFixed(2) }}</span>
+    </div>
+
+    <div class="flex justify-between border-b py-2">
+      <span>Tax</span>
+      <span class="font-semibold">${{ cartService.orderSummary().tax.toFixed(2) }}</span>
+    </div>
+
+    <div class="flex justify-between border-b py-2">
+      <span>Shipping</span>
+      <span class="font-semibold">${{cartService.orderSummary().shipping.toFixed(2)}}</span>
+    </div>
+
+    <div class="flex justify-between border-b py-2">
+        <span>Discount</span>
+        <span class="font-semibold">-${{cartService.orderSummary().discount?.toFixed(2)}}</span>
+    </div>
+
+    <div class="flex justify-between text-lg font-bold py-2">
+      <span>Total</span>
+      <span>${{ cartService.orderSummary().total.toFixed(2)}}</span>
+    </div>
+
+    <button mat-button *ngIf="cartService.orderSummary().total>0" routerLink="/checkout" color="primary" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+      Proceed to Checkout
+    </button>
+  </div>
