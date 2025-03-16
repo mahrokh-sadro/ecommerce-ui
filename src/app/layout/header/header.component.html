@@ -7,7 +7,7 @@
         <a class="hover:text-blue-500">Contact</a>
     </nav>
     <div class="flex gap-4 items-center">
-         <a [matBadge]="getCartItems()" matBadgeSize="large" class="custom-badge relative hover:text-blue-500" routerLink="/cart">
+         <a [matBadge]="cartService.totalCartItems()" matBadgeSize="large" class="custom-badge relative hover:text-blue-500" routerLink="/cart">
              <mat-icon>shopping_cart</mat-icon>
          </a>   
          @if(userService.loggedInUser()) {

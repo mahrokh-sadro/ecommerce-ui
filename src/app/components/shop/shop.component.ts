@@ -165,6 +165,10 @@ export class ShopComponent {
 
     }
 
+    addItemToCart(product: Product) {
+      this.cartService.addItemToCart(product).subscribe();
+    }
+
 }
 
 

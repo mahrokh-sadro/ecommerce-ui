@@ -26,15 +26,15 @@ export class CartComponent {
   }
 
   removeItem(item:any){
-     this.cartService.removeItemFromCart(item);
+     this.cartService.removeItemFromCart(item)?.subscribe();
   }
 
   increment(item:any){
-     this.cartService.increamentItem(item);
+     this.cartService?.increamentItem(item)?.subscribe();
   }
 
   decrement(item:any){
-     this.cartService.decreaseItemQuantity(item);
+     this.cartService.decreaseItemQuantity(item)?.subscribe();
   }
 
 

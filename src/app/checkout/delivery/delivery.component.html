@@ -1,0 +1,15 @@
+<div class="w-full">
+    <mat-radio-group [value]="cartService.selectedDeliveryMethod()?.id" 
+      (change)="updateDeliveryMethod($event.value)"
+      aria-labelledby="example-radio-group-label" class="example-radio-group w-full">
+      @for (method of checkoutService.deliveryMethods; track method.id) {
+        <mat-radio-button class="example-radio-button w-full flex items-center" [value]="method">
+          <div class="flex justify-between w-full items-center">
+            <span class="mr-4">{{ method.name }} - {{ method.shippingPrice | currency }}</span>
+            <span class="text-gray-500">{{ method.description }}</span>
+          </div>
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+  </div>
+  

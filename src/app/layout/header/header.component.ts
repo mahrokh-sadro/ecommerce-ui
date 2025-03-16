@@ -23,13 +23,9 @@ import { UserService } from '../../services/user.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-   private cartService=inject(CartService);
+   cartService=inject(CartService);
    userService=inject(UserService);
    private router=inject(Router);
-
-   getCartItems(){
-     return this.cartService.totalCartItems();
-   }
 
    logout(){
      this.userService.logout().subscribe();

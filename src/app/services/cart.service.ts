@@ -7,7 +7,8 @@ import { Cart } from '../models/cart';
 import { CartItem } from '../models/cart';
 
 import {Product} from '../models/product'
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
+import { DeliveryMethod } from '../models/DeliveryMethod';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,31 +20,30 @@ export class CartService {
     return this.cart()?.cartItems?.reduce((total,item)=>total+item.quantity,0) || 0;
   })
   taxRate:number = 0.13;
-  shipping:number=5;
+  // shipping:number=5;
   discount:number=0;
+  selectedDeliveryMethod=signal<DeliveryMethod| null>(null);
   orderSummary=computed(()=>{
     const cart=this.cart();
+    const deliveryMethod=this.selectedDeliveryMethod();
     if (!cart) {
-      return { subTotal: 0, tax: 0, shipping: this.shipping, total: 0 };
+      return { subTotal: 0, tax: 0, shipping: 0, total: 0 };
     }
     let subTotal = cart.cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) ?? 0;
     let tax = subTotal * this.taxRate;
-    let total = parseFloat((subTotal + tax + this.shipping).toFixed(2));
+    // let total = parseFloat((subTotal + tax + this.shipping).toFixed(2));
+    const shipping= deliveryMethod? deliveryMethod?.shippingPrice:0;
+    console.log('deliveryMethod',deliveryMethod)
+    console.log('shipping',shipping)
+
     return{
       subTotal,
       tax,
-      shipping: this.shipping,
+      shipping: shipping,
       discount:this.discount,
-      total
+      total:subTotal + tax + shipping
     }
   })
-  // getTotalCartPrice(){
-  //   const cart=this.cart();
-  //   if(!cart) return 0;
-  //   let subTotal=this.getartSubTotal();
-  //   let total=(subTotal*(this.taxRate+1)+this.shipping).toFixed(2);
-  //   return total;
-  // }
 
   constructor() {
   }
@@ -57,29 +57,26 @@ export class CartService {
     )
   }
 
-  setCart(cart:Cart){
-    return this.http.post<Cart>("http://localhost:5001/api/cart",cart).subscribe({
-      next:data=>{
+  setCart(cart: Cart) {
+    return this.http.post<Cart>("http://localhost:5001/api/cart", cart).pipe(
+      tap(data => {
         this.cart.set(data);
-      },
-      error:()=>{}
-    })
+      })
+    );
   }
-
+  
   addItemToCart(product:Product,quantity:number=1){
-    console.log(product)
-    console.log(quantity)
-
-    const cart = this.cart() ?? this.createCart();
+    const cart = (this.cart() ?? this.createCart()) as Cart;
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==product.id);
     if(index!=-1){
       cart.cartItems[index].quantity += quantity
     }
     else{
       const newItem=this.mapProductToItem(product,quantity,cart.id) ;
+      if( !cart.cartItems ) cart.cartItems = [];
       cart.cartItems?.push(newItem);
     }
-    this.setCart(cart);
+    return this.setCart(cart);
   }
 
   createCart(){
@@ -112,7 +109,7 @@ export class CartService {
      if(index!=-1){
        cart.cartItems[index].quantity-=1; 
      }
-     this.setCart(cart);
+     return this.setCart(cart);
   }
 
   removeItemFromCart(cartItem:CartItem){
@@ -125,7 +122,7 @@ export class CartService {
     if(index!=-1){
       cart.cartItems.splice(index,1);
     }
-    this.setCart(cart);
+    return this.setCart(cart);
   }
 
   increamentItem(cartItem:CartItem){
@@ -135,7 +132,7 @@ export class CartService {
     if(index!=-1){
       cart.cartItems[index].quantity += 1
     }
-    this.setCart(cart);
+    return this.setCart(cart);
   }
 
     // deleteCart() {
