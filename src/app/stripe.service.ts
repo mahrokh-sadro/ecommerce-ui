@@ -58,7 +58,8 @@ export class StripeService {
     return this.http.post<Cart>(this.baseUrl + 'payment/' + cart.id, {}).pipe(
       map(async cart => {
         if (!hasClientSecret) {
-          await firstValueFrom(this.cartService.setCart(cart));
+          // await firstValueFrom(this.cartService.setCart(cart));
+          this.cartService.setCart(cart)
           return cart;
         }
         return cart;
@@ -81,8 +82,33 @@ export class StripeService {
     return this.addressElement;
   }
 
+  async createPaymentElement() {
+    if (!this.paymentElement) {
+      const elements = await this.initializeElements();
+      if (elements) {
+        this.paymentElement = elements.create('payment');
+      } else {
+        throw new Error('no elements instance');
+      }
+    }
+    return this.paymentElement;
+  }
 
+  clearElements() {
+    this.elements = undefined;
+    this.addressElement = undefined;
+    this.paymentElement = undefined;
+  }
 
-
-
+  async createConfirmationToken() {
+    const stripe = await this.getStripeInstance();
+    const elements = await this.initializeElements();
+    const result = await elements.submit();
+    if (result.error) throw new Error(result.error.message);
+    if (stripe) {
+      return await stripe.createConfirmationToken({elements});
+    } else {
+      throw new Error('Stripe not available');
+    }
+  }
 }

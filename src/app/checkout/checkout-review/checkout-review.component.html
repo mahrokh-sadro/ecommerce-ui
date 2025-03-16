@@ -1,0 +1,9 @@
+<div>
+    <div>Review your order and pay</div>
+    <div>Shipping Address</div>
+    <div>{{confirmationToken?.shipping?.address?.line1}} {{confirmationToken?.shipping?.address?.line2}}</div>
+    <div>{{confirmationToken?.shipping?.address?.city}}, {{confirmationToken?.shipping?.address?.country}}</div>
+    <div>{{confirmationToken?.shipping?.address?.postal_code}}</div>
+    <div>Payment Method</div>
+    <div>{{confirmationToken?.payment_method_preview?.type}}</div>
+</div>

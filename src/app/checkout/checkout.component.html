@@ -1,15 +1,13 @@
 <div class="flex mt-6 gap-6">
   <div class="w-3/4">
-    <mat-stepper class="example-stepper" (selectionChange)="onStepChange($event)">
-      <mat-step label="Address">
-        Address form
+    <mat-stepper class="example-stepper" (selectionChange)="onStepChange($event)" [linear]="true">
+      <mat-step label="Address" [completed]="status.address">
         <div id="address-element"></div>
         <div class="mt-4 text-end">
-          <button mat-flat-button matStepperNext>Next</button>
+          <button mat-flat-button matStepperNext [disabled]="!status.address">Next</button>
         </div>
       </mat-step>
       <mat-step label="Shipping">
-        Delivery form
         <app-delivery></app-delivery>
         <div class="mt-4 flex justify-between">
           <button mat-flat-button matStepperPrevious>Back</button>
@@ -17,13 +15,23 @@
         </div>
         
       </mat-step>
-      <mat-step label="Payment">
-        Payment form 
+      <mat-step label="Payment"  [completed]="status.payment">
+        <div id="payment-element"></div>
+        <div class="mt-4 flex justify-between">
+          <button mat-flat-button matStepperPrevious>Back</button>
+          <button mat-flat-button matStepperNext [disabled]="!status.payment">Next</button>
+        </div>
       </mat-step>
       <mat-step label="Confirmation">
-        Review from
+        <app-checkout-review [confirmationToken]="confirmationToken"></app-checkout-review>
+        <div class="mt-4 flex justify-between">
+          <button mat-flat-button matStepperPrevious>Back</button>
+          <button mat-flat-button matStepperNext>Place your order</button>
+        </div>
       </mat-step>
     </mat-stepper>
+    address:{{status.address}}
+    payment:{{status.payment}}
   </div>
   <div class="w-1/4">
      <app-order-summary></app-order-summary>

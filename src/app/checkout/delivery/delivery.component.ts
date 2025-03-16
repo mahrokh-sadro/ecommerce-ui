@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 
 import { CheckoutService } from '../../checkout.service';
 import { DeliveryMethod } from '../../models/DeliveryMethod';
@@ -12,7 +12,8 @@ import { CartService } from '../../services/cart.service';
   selector: 'app-delivery',
   imports: [
     MatRadioModule,
-    CommonModule
+    CommonModule,
+    FormsModule  
   ],
   templateUrl: './delivery.component.html',
   styleUrl: './delivery.component.scss'
@@ -28,6 +29,7 @@ export class DeliveryComponent {
           const method = methods.find(x => x.id === this.cartService.cart()?.deliveryMethodId);
           if (method) {
             this.cartService.selectedDeliveryMethod.set(method);
+            console.log('selectedDeliveryMethod',this.cartService.selectedDeliveryMethod())
           }
         }
       }
