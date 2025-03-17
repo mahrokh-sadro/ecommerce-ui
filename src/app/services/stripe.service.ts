@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ConfirmationToken, loadStripe, Stripe, StripeAddressElement, StripeAddressElementOptions, StripeElements, StripePaymentElement } from '@stripe/stripe-js';
-import { CartService } from './services/cart.service';
-import { UserService } from './services/user.service';
+import { CartService } from './cart.service';
+import { UserService } from './user.service';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, map } from 'rxjs';
-import { Cart } from './models/cart';
+import { Cart } from '../models/cart';
 
 @Injectable({
   providedIn: 'root'

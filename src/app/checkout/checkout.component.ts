@@ -10,7 +10,7 @@ import { loadStripe, Stripe} from '@stripe/stripe-js';
 import { ConfirmationToken, StripeAddressElement, StripeAddressElementChangeEvent, StripePaymentElement, StripePaymentElementChangeEvent } from '@stripe/stripe-js';
 
 import { OrderSummaryComponent } from '../order-summary/order-summary.component';
-import { StripeService } from '../stripe.service';
+import { StripeService } from '../services/stripe.service';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { CartService } from '../services/cart.service';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -81,33 +81,43 @@ export class CheckoutComponent {
   }
  
   async onStepChange(event: StepperSelectionEvent) {
-    if(event.selectedIndex==1){
-      const address: Address = {
-        line1: this.addressData.line1,
-        line2:this.addressData.line2,
-        city: this.addressData.city,
-        state: this.addressData.state,
-        postalCode: this.addressData.postalCode,
-        country: this.addressData.country
-      };
-      console.log(address)
-      // this.userService.updateAddress(this.addressData);
-      // this.userService.updateAddress(address).subscribe({
-      //   next: (response) => {
-      //     console.log('Address updated successfully:', response);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error updating address:', error);
-      //   }
-      // });
+    if (event.selectedIndex === 1) {
+      // Ensure addressData is populated before proceeding
+      if (this.addressData) {
+        const address: Address = {
+          line1: this.addressData?.address?.line1,
+          line2: this.addressData?.address?.line2,
+          city: this.addressData?.address?.city,
+          state: this.addressData?.address?.state,
+          postalCode: this.addressData?.address?.postal_code,
+          country: this.addressData?.address?.country
+        };
+
+        console.log('addressData', this.addressData);
+        console.log('address', address);
+        // Save address to the backend
+        this.userService.updateAddress(address).subscribe({
+          next: (response) => {
+            console.log('Address saved successfully:', response);
+          },
+          error: (error) => {
+            console.error('Error saving address:', error);
+          }
+        });
+      } else {
+        console.error('Address data is not available');
+      }
     }
+  
     if (event.selectedIndex === 2) {
       await firstValueFrom(this.stripeService.createOrUpdatePaymentIntent());
     }
+  
     if (event.selectedIndex === 3) {
       await this.getConfirmationToken();
     }
   }
+  
 
   async getConfirmationToken() {
     try {

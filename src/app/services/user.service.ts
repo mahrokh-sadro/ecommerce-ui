@@ -30,7 +30,7 @@ export class UserService {
   }
 
   updateAddress(address:Address){
-    return this.http.post(this.baseUrl+"user/address",address);
+    return this.http.post(this.baseUrl+"user/address",address,{withCredentials:true});
   }
 
   getUserInfo(){

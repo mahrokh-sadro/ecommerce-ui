@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { DeliveryMethod } from './models/DeliveryMethod';
+import { DeliveryMethod } from '../models/DeliveryMethod';
 import { map } from 'rxjs';
 
 @Injectable({

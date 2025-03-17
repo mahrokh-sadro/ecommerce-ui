@@ -3,7 +3,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CheckoutService } from '../../checkout.service';
+import { CheckoutService } from '../../services/checkout.service';
 import { DeliveryMethod } from '../../models/DeliveryMethod';
 import { CartService } from '../../services/cart.service';
 
