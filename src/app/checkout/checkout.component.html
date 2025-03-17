@@ -26,7 +26,7 @@
         <app-checkout-review [confirmationToken]="confirmationToken"></app-checkout-review>
         <div class="mt-4 flex justify-between">
           <button mat-flat-button matStepperPrevious>Back</button>
-          <button mat-flat-button matStepperNext>Place your order</button>
+          <button mat-flat-button matStepperNext (click)="placeOrder()">Place your order</button>
         </div>
       </mat-step>
     </mat-stepper>

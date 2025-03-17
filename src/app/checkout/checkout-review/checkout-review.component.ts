@@ -9,7 +9,7 @@ import { ConfirmationToken } from '@stripe/stripe-js';
 })
 export class CheckoutReviewComponent {
   @Input() confirmationToken?: ConfirmationToken;
-
+  cardValue:string="**** **** **** ";
 
   ngonInit(){
     console.log('--',this.confirmationToken)

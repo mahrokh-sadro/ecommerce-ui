@@ -1,9 +1,24 @@
-<div>
-    <div>Review your order and pay</div>
-    <div>Shipping Address</div>
-    <div>{{confirmationToken?.shipping?.address?.line1}} {{confirmationToken?.shipping?.address?.line2}}</div>
-    <div>{{confirmationToken?.shipping?.address?.city}}, {{confirmationToken?.shipping?.address?.country}}</div>
-    <div>{{confirmationToken?.shipping?.address?.postal_code}}</div>
-    <div>Payment Method</div>
-    <div>{{confirmationToken?.payment_method_preview?.type}}</div>
-</div>
+<div class="p-6 bg-white rounded-lg shadow-md space-y-6 max-w-4xl mx-auto">
+    <div class="text-lg font-semibold text-gray-900">Review your order and pay</div>
+  
+    <!-- Shipping Address Section -->
+    <div class="space-y-2">
+      <div class="text-base font-semibold text-gray-800">Shipping Address</div>
+      <div class="text-gray-700">
+        {{ confirmationToken?.shipping?.address?.line1 }} 
+        <span *ngIf="confirmationToken?.shipping?.address?.line2">, {{ confirmationToken?.shipping?.address?.line2 }}</span>
+      </div>
+      <div class="text-gray-700">{{ confirmationToken?.shipping?.address?.city }}, {{ confirmationToken?.shipping?.address?.country }}</div>
+      <div class="text-gray-700">{{ confirmationToken?.shipping?.address?.postal_code }}</div>
+    </div>
+  
+    <!-- Payment Method Section -->
+    <div class="space-y-2">
+      <div class="text-base font-semibold text-gray-800">Payment Method</div>
+      <div class="text-gray-700">{{ confirmationToken?.payment_method_preview?.card?.brand }}
+         {{cardValue}}{{ confirmationToken?.payment_method_preview?.card?.last4 }},
+         Exp:{{ confirmationToken?.payment_method_preview?.card?.exp_month }} /
+         {{ confirmationToken?.payment_method_preview?.card?.exp_year }}</div>
+    </div>
+  </div>
+  

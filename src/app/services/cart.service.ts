@@ -13,7 +13,7 @@ import { DeliveryMethod } from '../models/DeliveryMethod';
   providedIn: 'root'
 })
 export class CartService {
-  baseUrl=environment.apiUrl;
+  baseUrl= environment.apiUrl;
   private http=inject(HttpClient);
   cart=signal<Cart| null>(null);
   totalCartItems=computed(()=>{
@@ -135,14 +135,16 @@ export class CartService {
     return this.setCart(cart);
   }
 
-    // deleteCart() {
-  //   this.http.delete(this.baseUrl  + 'cart?id=' + this.cart()?.id).subscribe({
-  //     next: () => {
-  //       localStorage.removeItem('cart_id');
-  //       this.cart.set(null);
-  //     }
-  //   })
-  // }
+  deleteCart() {
+    console.log(2222)
+
+    this.http.delete("http://localhost:5001/api/" + 'cart/' + this.cart()?.id).subscribe({
+      next: () => {
+        localStorage.removeItem('cart_id');
+        this.cart.set(null);
+      }
+    })
+  }
 
   
  

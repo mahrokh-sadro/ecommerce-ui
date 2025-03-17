@@ -120,7 +120,23 @@ export class CheckoutComponent {
     } catch (error: any) {
       console.log(error.message);
     }
+  }
 
+  async placeOrder(){
+    try{
+       if(this.confirmationToken){
+          const result = await this.stripeService.confirmPayment(this.confirmationToken);
+          if(!result.error){
+            console.log(1111111)
+            this.cartService.deleteCart();
+            this.cartService.selectedDeliveryMethod.set(null);
+          }
+          
+       }
+    }
+    catch(error:any){
+      
+    }
   }
 
 }
