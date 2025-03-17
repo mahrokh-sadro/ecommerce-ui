@@ -71,9 +71,28 @@ export class StripeService {
     if (!this.addressElement) {
       const elements = await this.initializeElements();
       if (elements) {
+
+        const user = this.userService.loggedInUser();
+        console.log('user',user)
+        const _defaultvalues = user?.address
+          ? {
+              name:user?.firstName + " " + user?.lastName,
+              address: {
+                line1: user.address.line1 || '',
+                line2: user.address.line2 || '',
+                city: user.address.city || '',
+                state: user.address.state || '',
+                postal_code: user.address.postalCode || '',
+                country: user.address.country || '',
+              },
+            }
+          : {}; 
+
         const options: StripeAddressElementOptions = {
-          mode: 'shipping'
+          mode: 'shipping',
+          defaultValues: _defaultvalues, 
         };
+
         this.addressElement = elements.create('address', options);
       } else {
         throw new Error('no elements instance');

@@ -140,7 +140,7 @@ export class CartService {
 
     this.http.delete("http://localhost:5001/api/" + 'cart/' + this.cart()?.id).subscribe({
       next: () => {
-        localStorage.removeItem('cart_id');
+        localStorage.removeItem('cartId');
         this.cart.set(null);
       }
     })

@@ -23,7 +23,7 @@ export class UserService {
   register(values: any) {
     return this.http.post(this.baseUrl + 'user/register', values).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error('Registration error:', error); 
+        console.error('registration error:', error); 
         return throwError(() => error.error.errors); 
       })
     );
@@ -52,7 +52,7 @@ export class UserService {
         this.loggedInUser.set(null); 
       }),
       catchError((error) => {
-        console.error('Logout failed', error); 
+        console.error('logout failed', error); 
         throw error; 
       })
     );
