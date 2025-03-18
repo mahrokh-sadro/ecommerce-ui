@@ -29,8 +29,11 @@ export class DeliveryComponent {
           const method = methods.find(x => x.id === this.cartService.cart()?.deliveryMethodId);
           if (method) {
             this.cartService.selectedDeliveryMethod.set(method);
-            console.log('selectedDeliveryMethod',this.cartService.selectedDeliveryMethod())
           }
+        }
+        else{
+          this.cartService.selectedDeliveryMethod.set(methods[3]);
+          console.log('set Method',this.cartService.selectedDeliveryMethod())
         }
       }
     }); 

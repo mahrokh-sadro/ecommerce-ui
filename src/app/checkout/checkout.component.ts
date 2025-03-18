@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe } from '@angular/common';
 import { loadStripe, Stripe} from '@stripe/stripe-js';
 import { ConfirmationToken, StripeAddressElement, StripeAddressElementChangeEvent, StripePaymentElement, StripePaymentElementChangeEvent } from '@stripe/stripe-js';
+import { Router } from '@angular/router';
 
 import { OrderSummaryComponent } from '../order-summary/order-summary.component';
 import { StripeService } from '../services/stripe.service';
@@ -29,7 +30,6 @@ import { Address } from '../models/user';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AsyncPipe,
     DeliveryComponent,
     CheckoutReviewComponent
   ],
@@ -44,6 +44,8 @@ export class CheckoutComponent {
   private _formBuilder = inject(FormBuilder);
   private cartService=inject(CartService);
   private userService=inject(UserService);
+  private router=inject(Router);
+
   addressData: any;
   status={
     address:false,
@@ -61,7 +63,7 @@ export class CheckoutComponent {
     this.paymentElement=await this.stripeService.createPaymentElement();
     this.paymentElement.mount('#payment-element');
 
-     // Listen for address changes
+     // listen for address changes
     this.addressElement.on('change', (event: StripeAddressElementChangeEvent) => {
     if (event.complete) {
         console.log('Address details:', event.value);
@@ -70,11 +72,11 @@ export class CheckoutComponent {
       }
     });
 
-     // Add a change event listener to the payment element
+     //listen for payment element
      this.paymentElement.on('change', (event: StripePaymentElementChangeEvent) => {
       if (event.complete) {
         console.log('Payment details:', event.value);
-        this.status.payment = event.complete;  // Update the payment completion status
+        this.status.payment = event.complete;  
       }
     });
     
@@ -82,7 +84,6 @@ export class CheckoutComponent {
  
   async onStepChange(event: StepperSelectionEvent) {
     if (event.selectedIndex === 1) {
-      // Ensure addressData is populated before proceeding
       if (this.addressData) {
         const address: Address = {
           line1: this.addressData?.address?.line1,
@@ -137,9 +138,9 @@ export class CheckoutComponent {
        if(this.confirmationToken){
           const result = await this.stripeService.confirmPayment(this.confirmationToken);
           if(!result.error){
-            console.log(1111111)
             this.cartService.deleteCart();
             this.cartService.selectedDeliveryMethod.set(null);
+            this.router.navigateByUrl('/checkout/success');
           }
           
        }
