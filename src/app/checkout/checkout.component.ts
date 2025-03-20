@@ -5,7 +5,6 @@ import { Location } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AsyncPipe } from '@angular/common';
 import { loadStripe, Stripe} from '@stripe/stripe-js';
 import { ConfirmationToken, StripeAddressElement, StripeAddressElementChangeEvent, StripePaymentElement, StripePaymentElementChangeEvent } from '@stripe/stripe-js';
 import { Router } from '@angular/router';
@@ -19,6 +18,9 @@ import { firstValueFrom, from } from 'rxjs';
 import {CheckoutReviewComponent} from './checkout-review/checkout-review.component'
 import { UserService } from '../services/user.service';
 import { Address } from '../models/user';
+import { CheckoutService } from '../services/checkout.service';
+import { PaymentSummary } from '../models/PaymentSummary';
+import { BillingDetails } from '../models/BillingDetails';
 
 @Component({
   selector: 'app-checkout',
@@ -37,14 +39,13 @@ import { Address } from '../models/user';
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent {
-  private location=inject(Location);
   private stripeService=inject(StripeService);
   addressElement?: StripeAddressElement;
   paymentElement?: StripePaymentElement;
-  private _formBuilder = inject(FormBuilder);
   private cartService=inject(CartService);
   private userService=inject(UserService);
   private router=inject(Router);
+  private checkoutService=inject(CheckoutService);
 
   addressData: any;
   status={
@@ -86,6 +87,7 @@ export class CheckoutComponent {
     if (event.selectedIndex === 1) {
       if (this.addressData) {
         const address: Address = {
+          name:this.addressData?.address?.name,
           line1: this.addressData?.address?.line1,
           line2: this.addressData?.address?.line2,
           city: this.addressData?.address?.city,
@@ -126,7 +128,10 @@ export class CheckoutComponent {
         const result = await this.stripeService.createConfirmationToken();
         if (result.error) throw new Error(result.error.message);
         this.confirmationToken = result.confirmationToken;
-        console.log(this.confirmationToken);
+        console.log('confirmationToken',this.confirmationToken);
+        console.log('user' ,this.userService.loggedInUser() );
+        console.log('cart' ,this.cartService.cart() );
+
       }
     } catch (error: any) {
       console.log(error.message);
@@ -140,7 +145,35 @@ export class CheckoutComponent {
           if(!result.error){
             this.cartService.deleteCart();
             this.cartService.selectedDeliveryMethod.set(null);
-            this.router.navigateByUrl('/checkout/success');
+            
+            const payment: PaymentSummary = {
+              id:0,
+              last4:Number(this.confirmationToken?.payment_method_preview?.card?.last4),
+              brand:this.confirmationToken?.payment_method_preview?.card?.brand!,
+              expMonth:this.confirmationToken?.payment_method_preview?.card?.exp_month!,
+              expYear:this.confirmationToken?.payment_method_preview?.card?.exp_year!,
+            };
+
+            const billing_details=this.confirmationToken?.payment_method_preview?.billing_details;
+            const billingDetails: BillingDetails = {
+              email:billing_details?.email!,
+              name:billing_details?.name!,
+              phone:billing_details?.phone!,
+              deliveryMethodId:this.cartService.cart()?.deliveryMethodId,
+              paymentIntentId:this.cartService.cart()?.paymentIntentId,
+            };
+
+
+            const cartItems = this.cartService.cart()?.cartItems.map(({ productId, image, quantity }) => ({
+              productId,
+              image,
+              quantity
+            }));
+
+            this.checkoutService.createOrder(payment,billingDetails,cartItems!).subscribe({
+
+            });
+            // this.router.navigateByUrl('/checkout/success');
           }
           
        }
