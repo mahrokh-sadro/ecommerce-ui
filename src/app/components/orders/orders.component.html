@@ -1,1 +1,37 @@
-<p>orders works!</p>
+<div class="flex mt-6 gap-6">
+    <div class="w-3/4">
+      @for(item of orderService.orders(); track item) {
+        <mat-card class="shadow-lg rounded-lg border border-gray-200 bg-white w-full mb-4">
+          <!-- Card Header: Order Information -->
+          <mat-card-header class="flex justify-between items-center space-x-4 w-full bg-gray-200">
+            <div class="flex flex-col text-left">
+              <span class="text-sm text-gray-600">Order Placed:</span>
+              <span class="text-base text-gray-800">{{ item.orderDate | date:'short' }}</span>
+            </div>
+            <div class="flex flex-col text-left pl-4">
+                <span class="text-sm text-gray-600">Total:</span>
+                <span class="text-base text-gray-800">${{ item.total?.toFixed(2) }}</span>
+              </div>
+            <div class="flex flex-col text-right ml-auto">
+              <mat-card-title class="text-sm !text-sm text-gray-600">Order ID: <span class="text-base ">#{{ item.id }}</span></mat-card-title>
+              <mat-card-subtitle class="text-gray-500">{{ item.id }}</mat-card-subtitle>
+            </div>
+          
+          </mat-card-header>
+    
+          <!-- Card Content: Order Details -->
+          <mat-card-content class="flex flex-col space-y-2">
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-600">Shipping Email: {{ item.shippingEmail }}</span>
+              <span class="text-sm text-gray-600">Subtotal: ${{ item.subtotal?.toFixed(2) }}</span>
+              <span class="text-sm text-gray-600">Tax Amount: ${{ item.taxAmount?.toFixed(2) }}</span>
+            </div>
+          </mat-card-content>
+    
+          <!-- Card Actions: Placeholder Buttons -->
+       
+        </mat-card>
+      }
+    </div>
+  </div>
+  
