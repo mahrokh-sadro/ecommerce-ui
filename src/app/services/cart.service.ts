@@ -20,7 +20,6 @@ export class CartService {
     return this.cart()?.cartItems?.reduce((total,item)=>total+item.quantity,0) || 0;
   })
   taxRate:number = 0.13;
-  // shipping:number=5;
   discount:number=0;
   selectedDeliveryMethod=signal<DeliveryMethod| null>(null);
   orderSummary=computed(()=>{
@@ -115,7 +114,6 @@ export class CartService {
       return;
     }
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==cartItem.productId);
-    console.log(index)
     if(index!=-1){
       cart.cartItems.splice(index,1);
     }
@@ -133,8 +131,6 @@ export class CartService {
   }
 
   deleteCart() {
-    console.log(2222)
-
     this.http.delete("http://localhost:5001/api/" + 'cart/' + this.cart()?.id).subscribe({
       next: () => {
         localStorage.removeItem('cartId');

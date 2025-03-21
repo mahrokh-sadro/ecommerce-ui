@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { OrderService } from '../../order.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './orders.component.scss'
 })
 export class OrdersComponent {
-
+  
+  private orderService=inject(OrderService);
+  ngOnInit(){
+     this.orderService.getOrders().subscribe(data=>{
+      console.log('orders1',data);
+     })
+  }
 }
