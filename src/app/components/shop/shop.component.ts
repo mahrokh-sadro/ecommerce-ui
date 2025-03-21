@@ -20,7 +20,7 @@ import {ProductService} from '../../services/product.service'
 import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
 import { Cart } from '../../models/cart';
-import { LoadingIconComponent } from '../../loading-icon/loading-icon.component';
+import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 
 @Component({
   selector: 'app-shop',

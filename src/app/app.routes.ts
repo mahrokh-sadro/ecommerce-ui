@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { SuccessComponent } from './checkout/success/success.component';
 import { authGuard } from './auth.guard';
 import { cartGuard } from './cart.guard';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -19,5 +20,6 @@ export const routes: Routes = [
     {path:'cart' , component:CartComponent},
     {path:'user/login',component:LoginComponent},
     {path:'user/register',component:RegisterComponent},
+    {path:'orders' , component:OrdersComponent},
 
 ];

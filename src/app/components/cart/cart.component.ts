@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router'; 
 
 import { CartService } from '../../services/cart.service';
-import { OrderSummaryComponent } from '../../order-summary/order-summary.component'; 
+import { OrderSummaryComponent } from '../order-summary/order-summary.component'; 
 @Component({
   selector: 'app-cart',
   imports: [

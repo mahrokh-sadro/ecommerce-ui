@@ -9,7 +9,7 @@ import { loadStripe, Stripe} from '@stripe/stripe-js';
 import { ConfirmationToken, StripeAddressElement, StripeAddressElementChangeEvent, StripePaymentElement, StripePaymentElementChangeEvent } from '@stripe/stripe-js';
 import { Router } from '@angular/router';
 
-import { OrderSummaryComponent } from '../order-summary/order-summary.component';
+import { OrderSummaryComponent } from '../components/order-summary/order-summary.component';
 import { StripeService } from '../services/stripe.service';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { CartService } from '../services/cart.service';

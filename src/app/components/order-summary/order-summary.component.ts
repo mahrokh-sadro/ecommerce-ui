@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterModule  } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { CartService } from '../services/cart.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-order-summary',
