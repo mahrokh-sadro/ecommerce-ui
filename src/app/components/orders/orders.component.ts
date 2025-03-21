@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule,DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 
 import { OrderService } from '../../order.service';
@@ -11,7 +12,8 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     MatCardModule,
     MatIconModule,
-    DatePipe
+    DatePipe,
+    RouterLink,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
