@@ -128,6 +128,7 @@ export class CheckoutComponent {
         const result = await this.stripeService.createConfirmationToken();
         if (result.error) throw new Error(result.error.message);
         this.confirmationToken = result.confirmationToken;
+
         console.log('confirmationToken',this.confirmationToken);
         console.log('user' ,this.userService.loggedInUser() );
         console.log('cart' ,this.cartService.cart() );
@@ -173,7 +174,7 @@ export class CheckoutComponent {
             this.checkoutService.createOrder(payment,billingDetails,cartItems!).subscribe({
 
             });
-            // this.router.navigateByUrl('/checkout/success');
+            this.router.navigateByUrl('/checkout/success');
           }
           
        }

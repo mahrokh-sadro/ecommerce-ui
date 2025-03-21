@@ -31,10 +31,7 @@ export class CartService {
     }
     let subTotal = cart.cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) ?? 0;
     let tax = subTotal * this.taxRate;
-    // let total = parseFloat((subTotal + tax + this.shipping).toFixed(2));
     const shipping= deliveryMethod? deliveryMethod?.shippingPrice:0;
-    // console.log('deliveryMethod',deliveryMethod)
-    // console.log('shipping',shipping)
 
     return{
       subTotal,

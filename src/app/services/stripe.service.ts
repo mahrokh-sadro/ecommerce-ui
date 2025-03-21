@@ -58,8 +58,8 @@ export class StripeService {
     return this.http.post<Cart>(this.baseUrl + 'payment/' + cart.id, {}).pipe(
       map(async cart => {
         if (!hasClientSecret) {
-          // await firstValueFrom(this.cartService.setCart(cart));
-          this.cartService.setCart(cart)
+          await firstValueFrom(this.cartService.setCart(cart));
+          // this.cartService.setCart(cart)
           return cart;
         }
         return cart;
