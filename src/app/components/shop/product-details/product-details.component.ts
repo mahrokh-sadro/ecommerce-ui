@@ -11,9 +11,11 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';  
 
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
+import { Product } from '../../../models/product';
 
 @Component({
   selector: 'app-product-details',
@@ -27,7 +29,8 @@ import { CartService } from '../../../services/cart.service';
     MatInputModule ,
     MatButtonToggleModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatIconModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
@@ -37,28 +40,43 @@ export class ProductDetailsComponent {
     private productService=inject(ProductService);
     productId:string | null="";
     product:any;
-    quantityOptions:number[]=[];
+    quantity:number=1;
     cartService=inject(CartService);
-    selectedQuantity = 1;
     
     constructor(){
-      for(let i=0;i<30;i++){
-        this.quantityOptions[i]=i+1;
-      }
+       console.log('ccc',this.cartService.cart())
     }
 
     ngOnInit(){
       this.productId=this.route.snapshot.paramMap.get('id');
-      // console.log('productId',this.productId);
       if(this.productId){
         this.productService.getProductById(+this.productId).subscribe({
            next:(data:any)=>{
              this.product=data;
-            //  console.log(this.product)
            }
         })
       }
     }
 
+    increment(){
+        this.quantity++;
+    }
+ 
+    decrement(){
+      this.quantity--;
+    }
+
+    addToCart(product: Product, quantity: number) {
+      this.cartService.addItemToCart(product, quantity).subscribe(
+        (response) => {
+          console.log('Item added to cart successfully', response);
+          // Additional logic after the cart is updated
+        },
+        (error) => {
+          console.error('Error adding item to cart', error);
+          // Handle error if necessary
+        }
+      );
+    }
     
 }

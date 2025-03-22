@@ -56,18 +56,30 @@ export class CartService {
   setCart(cart: Cart) {
     return this.http.post<Cart>("http://localhost:5001/api/cart", cart).pipe(
       tap(data => {
+        console.log('set',data)
         this.cart.set(data);
       })
     );
   }
   
   addItemToCart(product:Product,quantity:number=1){
+
+
     const cart = (this.cart() ?? this.createCart()) as Cart;
+    console.log('product',product);
+    console.log('quantity',quantity);
+    console.log('cart',cart);
+
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==product.id);
+    console.log('index',index);
     if(index!=-1){
+    console.log('1');
+
       cart.cartItems[index].quantity += quantity
     }
     else{
+    console.log('2');
+
       const newItem=this.mapProductToItem(product,quantity,cart.id) ;
       if( !cart.cartItems ) cart.cartItems = [];
       cart.cartItems?.push(newItem);

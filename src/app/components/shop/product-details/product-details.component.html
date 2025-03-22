@@ -1,45 +1,47 @@
-@if(product){
+@if(product) {
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 max-w-screen-lg mx-auto">
         
-        <!-- Product Image -->
         <div class="flex items-center justify-center">
             <mat-card class="shadow-lg border rounded-lg p-4">
                 <img
                   mat-card-image
                   class="rounded-lg object-cover w-80 h-80"
-                  src="{{'images/'+product.image}}"
-                  alt="{{product.image}}"
+                  src="{{'images/' + product.image}}"
+                  alt="{{ product.image }}"
                 />
             </mat-card>
         </div>
 
-        <!-- Product Details -->
         <div class="flex flex-col gap-4">
-            <h1 class="text-2xl font-semibold text-gray-800">{{product.name}}</h1>
-            <h2 class="text-lg font-bold text-blue-600">{{product.price | currency}}</h2>
+            <h1 class="text-2xl font-semibold text-gray-800">{{ product.name }}</h1>
+            <h2 class="text-lg font-bold text-blue-600">{{ product.price | currency }}</h2>
 
-            <!-- Quantity & Add to Cart -->
-            <div class="flex gap-4 items-center">
-                <mat-form-field appearance="fill" class="w-32 h-16">
-                    <mat-label>Quantity</mat-label>
-                    <mat-select #mode value="selectedQuantity">
-                        <mat-option *ngFor="let q of quantityOptions" [value]="q">{{q}}</mat-option>
-                    </mat-select>
-                </mat-form-field>  
+            <div class="flex items-center gap-4">
+                <div class="flex items-center border border-gray-300 rounded-md px-2 py-1 space-x-1">
+                    <button mat-icon-button class="cursor-pointer disabled:text-gray-400 flex items-center justify-center w-8 h-8"
+                            (click)="decrement()" [disabled]="quantity <= 1">
+                        <mat-icon class="text-red-600 text-base">remove</mat-icon>
+                    </button>
 
-                <button mat-flat-button color="primary" class="px-6 py-2 text-white rounded-md" 
-                        (click)="cartService.addItemToCart(product,mode.value)">
+                    <div class="font-semibold text-lg w-6 text-center">{{ quantity }}</div>
+
+                    <button mat-icon-button class="cursor-pointer flex items-center justify-center w-8 h-8"
+                            (click)="increment()">
+                        <mat-icon class="text-green-600 text-base">add</mat-icon>
+                    </button>
+                </div>
+
+                <button mat-flat-button color="primary" class="px-4 py-1 text-white rounded-md text-sm"
+                        (click)="addToCart(product, quantity)">
                     Add to Cart
                 </button>
             </div>
 
-            <!-- Description -->
-            <p class="text-gray-600 leading-relaxed">{{product.description}}</p>  
+            <p class="text-gray-600 leading-relaxed">{{ product.description }}</p>  
 
-            <!-- Additional Info -->
             <div class="flex flex-col gap-1 text-gray-700">
-                <h3 class="text-base font-medium">Brand: <span class="font-normal">{{product.brand}}</span></h3>
-                <h3 class="text-base font-medium">Type: <span class="font-normal">{{product.type}}</span></h3>
+                <h3 class="text-base font-medium">Brand: <span class="font-normal">{{ product.brand }}</span></h3>
+                <h3 class="text-base font-medium">Type: <span class="font-normal">{{ product.type }}</span></h3>
             </div>             
         </div>
     </div>

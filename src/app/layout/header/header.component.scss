@@ -1,17 +1,73 @@
-.custom-badge .mat-icon{
-    width: 30px;
-    height: 30px;
-    font-size: 33px;
+/* Custom Badge Styles */
+.custom-badge .mat-icon {
+    width: 32px; /* Slightly bigger for better visibility */
+    height: 32px;
+    font-size: 36px; /* Adjust icon size */
 }
 
-.custom-badge .mat-badge-content{
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
+.custom-badge .mat-badge-content {
+    width: 22px;
+    height: 22px;
+    font-size: 14px; /* Adjust text size to fit properly */
 }
 
-a{
-    &.active{
-        color:blue
+/* Navigation Link Styling */
+a {
+    &.active {
+        color: #4f46e5; /* Active link color for consistency */
+    }
+
+    &:hover {
+        color: #c7d2fe; /* Lighter blue for hover effect */
+    }
+}
+
+/* Header Background Styling */
+header {
+    background: linear-gradient(to right, #4f46e5, #3b82f6); /* Professional blue gradient */
+}
+
+/* Navigation Styling */
+nav {
+    font-size: 1.125rem; /* Slightly larger text */
+    letter-spacing: 0.5px; /* Space between letters for better readability */
+}
+
+nav a {
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect for navigation links */
+nav a:hover {
+    color: #c7d2fe; /* Soft blue hover effect */
+}
+
+/* User and Cart Button Styling */
+button {
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    color: #c7d2fe;
+}
+
+/* Mat Menu Styling */
+.mat-menu-item {
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.mat-menu-item:hover {
+    background-color: #f3f4f6;
+}
+
+/* Responsive Design - Adjust layout for smaller screens */
+@media screen and (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+        gap: 4px;
+    }
+    nav {
+        flex-direction: column;
     }
 }
