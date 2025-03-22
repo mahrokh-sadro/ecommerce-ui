@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 export class OrderService {
   baseUrl = "http://localhost:5001/api/";
   private http=inject(HttpClient);
-  orders=signal<Order[] | null>(null);
+  orders=signal<any[] | null>(null);
   // getDeliveryMethods(){
   //     return this.http.get<DeliveryMethod[]>(this.baseUrl+"payment/delivery-methods").pipe(
   //       map(data=>{
@@ -22,7 +22,17 @@ export class OrderService {
   getOrders(){
     return this.http.get<Order[]>(this.baseUrl+"payment/orders",{withCredentials:true}).pipe(
       map(data=>{
+        console.log('data',data)
         return data
+      })
+    )
+  }
+
+  getOrder(orderId:number){
+    return this,this.http.get<any>(this.baseUrl+"payment/"+orderId).pipe(
+      map(data=>{
+        console.log('order',data);
+        return data;
       })
     )
   }

@@ -1,3 +1,4 @@
+
 export class Order{
     id?:number;
     shippingEmail?:string;
@@ -11,6 +12,6 @@ export class Order{
     discount?:number;
     taxAmount?:number;
     total?:number;
+    image?:string;
     // PaymentIntentId
-
 }

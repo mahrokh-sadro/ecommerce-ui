@@ -1,0 +1,48 @@
+<div class="container mx-auto p-6 flex justify-center items-start">
+    <div class="w-3/4">
+      <mat-card class="shadow-lg p-6">
+        <h2 class="text-xl font-bold mb-6">Order Details</h2>
+  
+        <div class="flex justify-between mb-6">
+          <!-- Order Details Section -->
+          <div class="flex-1">
+            <div>
+              <p><span class="text-sm font-bold">Order ID:</span> <span class="text-base">#{{ orderData?.order?.id }}</span></p>
+              <p><span class="text-sm font-bold">Email:</span> <span class="text-base">{{ orderData?.order?.shippingEmail }}</span></p>
+              <p><span class="text-sm font-bold">Order Date:</span> <span class="text-base">{{ orderData?.order?.orderDate | date }}</span></p>
+              <p><span class="text-sm font-bold">Subtotal:</span> <span class="text-base">${{ orderData?.order?.subtotal?.toFixed(2) }}</span></p>
+              <p><span class="text-sm font-bold">Tax:</span> <span class="text-base">${{ orderData?.order?.taxAmount?.toFixed(2) }}</span></p>
+              <p class="font-bold"><strong>Total:</strong> <span class="text-base">${{ orderData?.order?.total?.toFixed(2) }}</span></p>
+            </div>
+          </div>
+  
+          <!-- Shipping Address Section -->
+          <div class="flex-1 pl-8">
+            <h3 class="text-sm font-bold">Shipping Address</h3>
+            <p class="text-base">{{ orderData?.shippingAddress?.line1 }}</p>
+            <p class="text-base">{{ orderData?.shippingAddress?.city }}, {{ orderData?.shippingAddress?.state }} {{ orderData?.shippingAddress?.postalCode }}</p>
+            <p class="text-base">{{ orderData?.shippingAddress?.country }}</p>
+  
+            <h3 class="text-sm font-bold mt-6">Delivery Method</h3>
+            <p class="text-base">{{ orderData?.deliveryMethod?.name }} - {{ orderData?.deliveryMethod?.description }}</p>
+          </div>
+        </div>
+  
+        <hr class="my-6" />
+  
+        <!-- Items Ordered -->
+        <h3 class="text-lg font-semibold mb-4">Items Ordered</h3>
+        <div class="overflow-y-auto max-h-64 space-y-2">
+          <div class="grid grid-cols-2 gap-4">
+            <div *ngFor="let item of orderData?.items" class="flex items-center pb-4">
+              <img [src]="'images/' + item.image" alt="Product" class="w-16 h-16 object-cover rounded-lg">
+              <div class="ml-4">
+                <p class="text-sm">x{{ item.quantity }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  

@@ -29,7 +29,7 @@
                   <span class="text-sm text-gray-600">Shipping Email: {{ item.shippingEmail }}</span>
                   <span class="text-sm text-gray-600">Subtotal: ${{ item.subtotal?.toFixed(2) }}</span>
                   <span class="text-sm text-gray-600">Tax Amount: ${{ item.taxAmount?.toFixed(2) }}</span>
-                  <button class="text-sm text-blue-500 text-left cursor-pointer" routerLink="/">View order details</button>
+                  <button class="text-sm text-blue-500 text-left cursor-pointer" routerLink="{{item.id}}">View order details</button>
                 </div>
               </div>
             </div>
