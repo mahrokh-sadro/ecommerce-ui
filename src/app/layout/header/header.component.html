@@ -1,9 +1,6 @@
 <header class="p-3 w-full shadow-md" style="background: linear-gradient(to right, #6a1b9a, #4caf50);">
   <div class="flex items-center justify-between max-w-screen-xl mx-auto">
-      <!-- Logo -->
       <img src="images/logo.jpg" alt="Logo" class="w-16 h-auto rounded-md shadow-md">
-
-      <!-- Navigation -->
       <nav class="flex gap-8 my-2 uppercase text-lg text-white font-medium hover:text-blue-600 transition-all">
           <a 
               routerLink="/" 
@@ -16,14 +13,7 @@
               routerLinkActive="active" 
               class="hover:text-blue-600 transition-colors">Shopping
           </a>
-          <!-- <a 
-              routerLink="/contact" 
-              routerLinkActive="active" 
-              class="hover:text-blue-600 transition-colors">Contact
-          </a> -->
       </nav>
-      
-      <!-- User and Cart -->
       <div class="flex gap-6 items-center">
           <a [matBadge]="cartService.totalCartItems()" [matBadgeHidden]="cartService.totalCartItems() === 0"
              matBadgeSize="large" class="custom-badge relative hover:text-blue-500 transition-all" routerLink="/cart">

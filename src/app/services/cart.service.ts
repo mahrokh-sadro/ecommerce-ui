@@ -30,8 +30,7 @@ export class CartService {
     }
     let subTotal = cart.cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) ?? 0;
     let tax = subTotal * this.taxRate;
-    const shipping= deliveryMethod? deliveryMethod?.shippingPrice:0;
-
+    const shipping= deliveryMethod? deliveryMethod?.shippingPrice:10;
     return{
       subTotal,
       tax,
@@ -63,23 +62,12 @@ export class CartService {
   }
   
   addItemToCart(product:Product,quantity:number=1){
-
-
     const cart = (this.cart() ?? this.createCart()) as Cart;
-    console.log('product',product);
-    console.log('quantity',quantity);
-    console.log('cart',cart);
-
     const index=cart.cartItems?.findIndex((item:any)=>item.productId==product.id);
-    console.log('index',index);
     if(index!=-1){
-    console.log('1');
-
       cart.cartItems[index].quantity += quantity
     }
     else{
-    console.log('2');
-
       const newItem=this.mapProductToItem(product,quantity,cart.id) ;
       if( !cart.cartItems ) cart.cartItems = [];
       cart.cartItems?.push(newItem);
@@ -150,8 +138,6 @@ export class CartService {
       }
     })
   }
-
-  
  
 }
 

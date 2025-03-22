@@ -166,6 +166,7 @@ export class ShopComponent {
     }
 
     addItemToCart(product: Product) {
+      product.isClicked=true;
       this.cartService.addItemToCart(product).subscribe();
     }
 

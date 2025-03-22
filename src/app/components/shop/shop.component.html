@@ -21,16 +21,19 @@
            alt="{{product.image}}"
          />
          <mat-card-content>
-           <h2 class="">{{product.name}}</h2>
+           <h2 
+           >{{product.name}}</h2>
            <p class="font-light">{{product.price | currency}}</p>
          </mat-card-content>
-          <mat-card-actions (click)="$event.stopPropagation()">
-             <button mat-stroked-button class="w-full" (click)="addItemToCart(product)">
-                <mat-icon>add_shopping_cart</mat-icon>
-                Add to cart
+          <mat-card-actions (click)="$event.stopPropagation()" *ngIf="!product.isClicked">
+             <button mat-stroked-button class="w-full" (click)="addItemToCart(product);">
+                <span ><mat-icon>add_shopping_cart</mat-icon>
+                Add to cart</span>
              </button>
          </mat-card-actions>
-     </mat-card>
+         <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full">
+          In cart
+        </span>     </mat-card>
      <!-- Add more mat-cards here as needed -->
  </div>
  <mat-paginator

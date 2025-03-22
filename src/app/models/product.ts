@@ -7,4 +7,5 @@ export interface Product{
     image:string;
     type:string;
     brand:string;
+    isClicked:boolean;
 }
