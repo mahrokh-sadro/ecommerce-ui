@@ -1,39 +1,61 @@
-<header class="border-b p-3 w-full shadow-md bg-white">
-  <div class="flex items-center justify-between max-w-screen-2xl mx-auto">
-    <img src="images/logo.jpg" alt="Logo" class="w-12 h-auto">
-    <nav class="flex gap-6 my-2 uppercase text-xl text-gray-700">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="hover:text-blue-500">Home</a>
-        <a routerLink="/products" class="hover:text-blue-500">Shopping</a>
-        <a class="hover:text-blue-500">Contact</a>
-    </nav>
-    <div class="flex gap-4 items-center">
-         <a [matBadge]="cartService.totalCartItems()" [matBadgeHidden]="cartService.totalCartItems() === 0"
-            matBadgeSize="large" class="custom-badge relative hover:text-blue-500" routerLink="/cart">
-             <mat-icon>shopping_cart</mat-icon>
-         </a>   
-         @if(userService.loggedInUser()) {
-            <button mat-button [matMenuTriggerFor]="menu" class="flex items-center gap-2 hover:text-blue-500">
-                <mat-icon>arrow_downward</mat-icon>
-                <span>Hello, {{ userService.loggedInUser()?.firstName }}</span>
-            </button>
-         } @else {
-            <button mat-stroked-button routerLink="user/login" class="hover:text-blue-500">Login</button>
-            <button mat-stroked-button routerLink="user/register" class="hover:text-blue-500">Register</button>
-         }
+<header class="border-b p-3 w-full shadow-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div class="flex items-center justify-between max-w-screen-2xl mx-auto">
+      <!-- Logo -->
+      <img src="images/logo.jpg" alt="Logo" class="w-16 h-auto rounded-md shadow-md">
+
+      <!-- Navigation -->
+      <nav class="flex gap-8 my-2 uppercase text-xl text-white font-medium hover:text-blue-600 transition-all">
+          <a 
+            routerLink="/" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact:true}" 
+            class="hover:text-blue-600 transition-colors">Home
+          </a>
+          <a 
+            routerLink="/products" 
+            routerLinkActive="active" 
+            class="hover:text-blue-600 transition-colors">Shopping
+          </a>
+          <a 
+            routerLink="/contact" 
+            routerLinkActive="active" 
+            class="hover:text-blue-600 transition-colors">Contact
+          </a>
+      </nav>
+      
+      <!-- User and Cart -->
+      <div class="flex gap-6 items-center">
+        <a [matBadge]="cartService.totalCartItems()" [matBadgeHidden]="cartService.totalCartItems() === 0"
+           matBadgeSize="large" class="custom-badge relative hover:text-blue-500 transition-all" routerLink="/cart">
+           <mat-icon class="text-xl">shopping_cart</mat-icon>
+        </a>
+        
+        @if(userService.loggedInUser()) {
+          <!-- User Dropdown Trigger -->
+          <button mat-button [matMenuTriggerFor]="menu" class="flex items-center gap-2 hover:text-blue-600 transition-colors">
+              <mat-icon class="text-xl">arrow_downward</mat-icon>
+              <span class="text-lg font-semibold">Hello, {{ userService.loggedInUser()?.firstName }}</span>
+          </button>
+        } @else {
+          <!-- Show Login/Register if no user -->
+          <button mat-stroked-button routerLink="user/login" class="hover:text-blue-600 transition-colors">Login</button>
+          <button mat-stroked-button routerLink="user/register" class="hover:text-blue-600 transition-colors">Register</button>
+        }
+      </div>
     </div>
-  </div>
 </header>
 
+<!-- Menu for logged-in users -->
 <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/cart" class="hover:bg-gray-100">
+    <button mat-menu-item routerLink="/cart" class="hover:bg-gray-100 transition-colors p-2 rounded-md">
         <mat-icon>shopping_cart</mat-icon>
         <span>My Cart</span>
     </button>
-    <button mat-menu-item routerLink="/orders" class="hover:bg-gray-100">
+    <button mat-menu-item routerLink="/orders" class="hover:bg-gray-100 transition-colors p-2 rounded-md">
         <mat-icon>list_alt</mat-icon>
         <span>My Orders</span>
     </button>
-    <button mat-menu-item (click)="logout()" class="hover:bg-gray-100">
+    <button mat-menu-item (click)="logout()" class="hover:bg-gray-100 transition-colors p-2 rounded-md">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
     </button>
