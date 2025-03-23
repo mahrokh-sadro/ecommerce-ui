@@ -1,61 +1,65 @@
 @if(cartService.cart()?.cartItems?.length! > 0) {
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
     <div class="col-span-2 flex flex-col gap-6">
       <div *ngFor="let item of cartService.cart()?.cartItems">
-        <mat-card appearance="outlined" class="p-6 shadow-md rounded-lg border border-gray-200">
-          <mat-card-header class="flex items-center gap-6">
-            <img class="w-24 h-24 object-cover rounded-lg" 
-                 src="{{'images/'+item.image}}" 
-                 alt="{{ item.name }}">
+        <mat-card appearance="outlined" class="shadow-md rounded-lg border border-gray-200">
+          <mat-card-header class="px-4 py-3 bg-gray-300 border-l-4 border-purple-700" 
+            style="height: 50px;border-top-left-radius: 11px;border-top-right-radius: 11px;">
+            <!-- Empty header -->
+          </mat-card-header>  
 
-            <div class="flex flex-col flex-grow">
-              <mat-card-title class="text-lg !text-lg font-bold text-gray-800">{{ item.name }}</mat-card-title>
-              <span class="text-gray-700 font-semibold">${{ item.price }}</span>
+          <mat-card-content class="mt-2">
+            <div class="grid grid-cols-6 gap-4 items-center">
+              <div class="col-span-1">
+                <img class="w-24 h-24 object-cover rounded-lg" 
+                     src="{{'images/'+item.image}}" 
+                     alt="{{ item.name }}">
+              </div>
+  
+              <div class="col-span-5 flex items-center justify-between w-full">
+                <div class="flex flex-col">
+                  <mat-card-title class="text-lg !text-lg font-semibold text-gray-800">{{ item.name }}</mat-card-title>
+                  <span class="text-gray-700 font-semibold">${{ item.price }}</span>
+                </div>
+  
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center border border-gray-300 rounded-md px-2 py-1 space-x-1">
+                    <button mat-icon-button class="cursor-pointer disabled:text-gray-400 flex items-center justify-center w-8 h-8"
+                            (click)="decrement(item)" [disabled]="item.quantity <= 1">
+                      <mat-icon class="text-red-600 text-base">remove</mat-icon>
+                    </button>
 
-              <div class="flex items-center gap-6 mt-4">
-                <button mat-icon-button (click)="removeItem(item)" *ngIf="item.quantity==1">
-                    <mat-icon class="text-red-600 !text-red-600">delete</mat-icon>
-                </button>               
-                <button mat-icon-button (click)="decrement(item)" *ngIf="item.quantity>1">
-                    <mat-icon class="text-red-600">remove</mat-icon>
-                </button>
+                    <div class="font-semibold text-lg w-6 text-center">{{ item.quantity }}</div>
 
-                <div class="font-semibold text-xl">{{ item.quantity }}</div>
-
-                <button mat-icon-button (click)="increment(item)">
-                    <mat-icon class="text-green-600">add</mat-icon>
-                </button>
-
-                <div class="w-px bg-gray-400 h-6"></div>
-
-                <button mat-button color="warn" (click)="removeItem(item)" class="flex items-center gap-2">
+                    <button mat-icon-button class="cursor-pointer flex items-center justify-center w-8 h-8"
+                            (click)="increment(item)">
+                      <mat-icon class="text-green-600 text-base">add</mat-icon>
+                    </button>
+                  </div>
+  
+                  <button mat-button color="warn" (click)="removeItem(item)" class="flex items-center gap-2">
                     <mat-icon class="text-red-600 !text-red-600">delete</mat-icon>
                     <span>Delete</span>
-                </button>
+                  </button>
+                </div>
               </div>
             </div>
-          </mat-card-header>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>
 
     <div class="col-span-1 flex flex-col gap-6 self-start">
-      
       <app-order-summary></app-order-summary>
-
       <div class="bg-white shadow-lg rounded-lg p-6 w-full">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Promo Code</h2>
         <p class="text-gray-600">Enter a promo code to get a discount.</p>
-
         <input type="text" placeholder="Enter code" class="border border-gray-300 rounded-lg p-3 w-full mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-
         <button mat-button color="primary" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
           Apply Code
         </button>
       </div>
-
     </div>
-
   </div>
 }

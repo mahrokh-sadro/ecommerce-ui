@@ -2,10 +2,11 @@
   <div class="w-3/4 mx-auto">
     @for(item of orderService.orders(); track item) {
       <mat-card class="shadow-lg rounded-lg border border-gray-200 bg-white w-full mb-4">
-          <mat-card-header class="flex justify-between items-center px-4 py-3 bg-gray-300 border-l-4 border-purple-700">
+          <mat-card-header class="flex justify-between items-center px-4 py-3 bg-gray-300 border-l-4 border-purple-700"
+               style="border-top-left-radius: 11px;border-top-right-radius: 11px;">
               <div class="flex flex-col text-left">
                   <span class="text-sm text-gray-700 font-medium">Order Placed:</span>
-                  <span class="text-base text-gray-900">{{ item.orderDate | date:'short' }}</span>
+                  <span class="text-base text-gray-900">{{ item.orderDate | date:'yyyy-MM-dd' }}</span>
               </div>
               <div class="flex flex-col text-left pl-4">
                   <span class="text-sm text-gray-700 font-medium">Total:</span>
