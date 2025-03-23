@@ -6,12 +6,15 @@
   
       <div class="bg-gray-50 p-4 mt-6 rounded-lg shadow-sm w-full">
         <h2 class="text-base font-semibold text-gray-700">Order Details</h2>
-        <p class="text-gray-600">Order ID: </p>
-        <p class="text-gray-600">Total: $</p>
+        <p class="text-gray-600">Order ID: {{orderId}}</p>
+        <p class="text-gray-600">Total: ${{ total | number: '1.2-2' }}</p>
       </div>
   
-      <button mat-stroked-button color="cursor-pointer" class="mt-6" routerLink="/products">
+      <button mat-button color="primary" class="cursor-pointer mt-6" routerLink="/products">
         Continue Shopping
+      </button>
+      <button mat-button color="primary" class=" cursor-pointer mt-6" routerLink="/orders">
+        My Orders
       </button>
     </div>
   </div>

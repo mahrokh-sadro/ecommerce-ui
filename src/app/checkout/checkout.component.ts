@@ -172,7 +172,11 @@ export class CheckoutComponent {
             }));
 
             this.checkoutService.createOrder(payment,billingDetails,cartItems!,this.addressData).subscribe({
+               next:data=>{
+                 console.log(data);
+                 this.router.navigateByUrl(`/checkout/success?orderId=${data.id}&total=${data.total}`);
 
+               }
             });
             this.router.navigateByUrl('/checkout/success');
           }

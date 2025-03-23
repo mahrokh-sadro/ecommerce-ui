@@ -42,7 +42,7 @@ export class CheckoutService {
       shippingAddress
     };
     console.log('shippingAddress',shippingAddress)
-    return this.http.post<Boolean>(this.baseUrl+"Payment/order",payload,{withCredentials:true}).pipe(
+    return this.http.post<any>(this.baseUrl+"Payment/order",payload,{withCredentials:true}).pipe(
       map(data=>{
          return data
       })
