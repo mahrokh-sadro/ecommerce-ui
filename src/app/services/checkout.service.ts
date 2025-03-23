@@ -25,14 +25,23 @@ export class CheckoutService {
     )
   }
 
-  createOrder( payment:PaymentSummary,billingDetails:BillingDetails,cartItems:any[]){
-    
+  createOrder( payment:PaymentSummary,billingDetails:BillingDetails,cartItems:any[],addressData:any){
+    let shippingAddress={} as Address;
+    shippingAddress.name=addressData?.name;
+    shippingAddress.line1=addressData?.address?.line1;
+    shippingAddress.line2=addressData?.address?.line2;
+    shippingAddress.city=addressData?.address?.city;
+    shippingAddress.state=addressData?.address?.state;
+    shippingAddress.postalCode=addressData?.address?.postal_code;
+    shippingAddress.country=addressData?.address?.country;
+
     const payload = {
       payment,
       billingDetails,
-      cartItems // Make sure this is an array
+      cartItems,
+      shippingAddress
     };
-
+    console.log('shippingAddress',shippingAddress)
     return this.http.post<Boolean>(this.baseUrl+"Payment/order",payload,{withCredentials:true}).pipe(
       map(data=>{
          return data

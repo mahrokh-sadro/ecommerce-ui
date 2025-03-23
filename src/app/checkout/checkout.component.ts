@@ -99,14 +99,14 @@ export class CheckoutComponent {
         console.log('addressData', this.addressData);
         console.log('address', address);
         // Save address to the backend
-        this.userService.updateAddress(address).subscribe({
-          next: (response) => {
-            console.log('Address saved successfully:', response);
-          },
-          error: (error) => {
-            console.error('Error saving address:', error);
-          }
-        });
+        // this.userService.updateAddress(address).subscribe({
+        //   next: (response) => {
+        //     console.log('Address saved successfully:', response);
+        //   },
+        //   error: (error) => {
+        //     console.error('Error saving address:', error);
+        //   }
+        // });
       } else {
         console.error('Address data is not available');
       }
@@ -171,7 +171,7 @@ export class CheckoutComponent {
               quantity
             }));
 
-            this.checkoutService.createOrder(payment,billingDetails,cartItems!).subscribe({
+            this.checkoutService.createOrder(payment,billingDetails,cartItems!,this.addressData).subscribe({
 
             });
             this.router.navigateByUrl('/checkout/success');
