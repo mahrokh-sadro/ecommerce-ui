@@ -1,0 +1,27 @@
+.category-carousel {
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+  
+    .category-card {
+      width: 350px;    // Make the card wider
+      height: 250px;   // Make the card shorter
+      text-align: center;
+      overflow: hidden;
+    }
+  
+    .category-card img {
+      width: 100%;        // Make the image take full width of the card
+      height: 70%;        // Make image take 70% of the card height
+      object-fit: cover;  // Ensure the image doesn't stretch
+    }
+  
+    .category-card h3 {
+      margin-top: 10px;
+      font-size: 1.25rem; // Optional: Increase font size for the category title
+    }
+  }
+
+  

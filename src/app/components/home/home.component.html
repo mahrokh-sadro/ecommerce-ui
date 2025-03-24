@@ -1,1 +1,75 @@
-<p>home works!</p>
+<div class="mt-6 mx-auto w-full">
+    <ngx-slick-carousel class="carousel" [config]="slideConfig">
+      <div *ngFor="let banner of banners" ngxSlickItem>
+        <img [src]="banner.image" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
+      </div>
+    </ngx-slick-carousel>
+</div>
+
+<!-- Product Categories Section -->
+<!-- Product Categories Section -->
+<div class="product-categories mt-8">
+    <!-- <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold">Shop by Categories</h2>
+    </div> -->
+  
+    <!-- Slick Carousel for Categories -->
+    <div class="category-carousel">
+      <ngx-slick-carousel class="carousel" [config]="categoryCarouselConfig">
+        <div *ngFor="let category of categories" ngxSlickItem>
+          <div class="category-card text-center">
+            <img [src]="category.image" alt="{{ category.name }}" class="w-full h-40 object-cover rounded-lg">
+            <h3 class="mt-2">{{ category.name }}</h3>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div>
+  
+  <!-- Plug into New Tech Section -->
+<div class="mt-8 mx-auto w-full">
+    <!-- <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold">Plug into New Tech</h2>
+    </div> -->
+  
+    <ngx-slick-carousel class="carousel" [config]="techCarouselConfig">
+      <div *ngFor="let tech of newTechItems" ngxSlickItem class="px-2">
+        <!-- Circular card with image and name under it -->
+        <div class="flex flex-col items-center">
+          <!-- Circular image -->
+          <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg mb-1"> <!-- Reduced margin further -->
+            <img [src]="tech.image" alt="{{ tech.name }}" class="w-full h-full object-cover">
+          </div>
+          <!-- Name under the image -->
+          <h3 class="text-lg font-semibold">{{ tech.name }}</h3>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+  
+  <div class="mt-6 mx-auto w-full">
+      <div >
+        <img src="images/1.jpg" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
+      </div>
+  </div>
+  
+
+  <!-- Featured Products Section -->
+<div class="mt-6 mx-auto w-full ">
+    <h2 class="text-xl font-semibold mb-4">Featured Products</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let product of featuredProducts" class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transform transition-all">
+        <img [src]="product.image" alt="{{ product.name }}" class="w-full h-48 object-cover rounded-lg">
+        <h3 class="mt-2 text-lg font-semibold">{{ product.name }}</h3>
+        <p class="mt-1 text-sm text-gray-600">{{ product.price }}</p>
+      </div>
+    </div>
+</div>
+  
+<div class="mt-6 mx-auto w-full">
+    <div >
+      <img src="images/1.jpg" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
+    </div>
+</div>
+
+  
