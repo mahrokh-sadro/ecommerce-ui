@@ -13,7 +13,7 @@ export class ProductService {
 
   constructor() { }
 
-  getProducts(brands?:string[],types?:string[],sort?:string){
+  getProducts(brands?:string[],types?:string[],sort?:string,searchTerm?:string){
     let params=new HttpParams();
     if(brands && brands.length>0){
       params=params.append('brands',brands.join(','));
@@ -27,6 +27,9 @@ export class ProductService {
       params=params.append('sort',sort);
     } 
 
+    if(searchTerm && searchTerm.length>0){
+      params=params.append('searchTerm',searchTerm);
+    } 
     return this.http.get(this.baseUrl + "Product/products",{params});
   }
 

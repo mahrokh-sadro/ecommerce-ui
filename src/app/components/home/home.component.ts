@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CommonModule, NgFor } from '@angular/common';
-
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
   imports: [
     SlickCarouselModule,
     CommonModule,
-    NgFor 
+    NgFor ,
+    MatButtonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   banners = [
-    { image: 'images/1.jpg' },
-    { image: 'images/2.jpg' },
-    { image: 'images/3.jpg' }
+    { image: 'images/1.jpg', name: 'Tech Product 1', description: 'This is a description of product 1' },
+    { image: 'images/2.jpg', name: 'Tech Product 2', description: 'This is a description of product 2' },
+    { image: 'images/3.jpg', name: 'Tech Product 3', description: 'This is a description of product 3' }
   ];
 
   slideConfig = {

@@ -15,7 +15,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { RouterLink } from '@angular/router';
 
-
 import {ProductService} from '../../services/product.service'
 import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
@@ -35,7 +34,8 @@ import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
     MatPaginatorModule,
     MatPaginator, 
     RouterLink,
-    LoadingIconComponent
+    LoadingIconComponent,
+    FormsModule
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
@@ -61,6 +61,7 @@ export class ShopComponent {
     cartService=inject(CartService);
     cart: Cart | null = null;
     isLoading:boolean=false;
+    searchTerm: string = '';
 
     ngOnInit() {
       this.getProducts();
@@ -84,7 +85,7 @@ export class ShopComponent {
       })
     }
 
-    getProducts(brands?:string[],types?:string[]){
+    getProducts(){
       this.isLoading=true;
       this.productService.getProducts().subscribe({
         next:(data:any)=>{
@@ -147,7 +148,7 @@ export class ShopComponent {
     onSortChange(event:any){
       console.log(event.options[0].value);
       this.selectedSortValue=event.options[0].value;
-      this.productService.getProducts(this.selectedBrands,this.selectedTypes,this.selectedSortValue).subscribe({
+      this.productService.getProducts(this.selectedBrands,this.selectedTypes,this.selectedSortValue,this.searchTerm).subscribe({
         next:(response:any)=>{
           this.products=response;
           this.updatePaginatedProducts();
@@ -169,6 +170,17 @@ export class ShopComponent {
       product.isClicked=true;
       this.cartService.addItemToCart(product).subscribe();
     }
+
+   onSearch(){
+    this.productService.getProducts(this.selectedBrands,this.selectedTypes,this.selectedSortValue,this.searchTerm).subscribe({
+      next:(response:any)=>{
+        this.products=response;
+        this.updatePaginatedProducts();
+      },
+      error:(error:any)=>console.log(error)
+    })
+   }
+    
 
 }
 

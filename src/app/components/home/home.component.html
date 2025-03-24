@@ -1,19 +1,22 @@
 <div class="mt-6 mx-auto w-full">
     <ngx-slick-carousel class="carousel" [config]="slideConfig">
       <div *ngFor="let banner of banners" ngxSlickItem>
-        <img [src]="banner.image" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
+        <div class="relative w-full h-80">
+          <img [src]="banner.image" alt="Banner" class="w-full h-full object-cover rounded-lg">
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-4 rounded-lg">
+            <h3 class="text-2xl font-semibold text-white mb-2">{{ banner.name }}</h3>
+            <p class="text-sm text-white mb-4">{{ banner.description }}</p>
+            <button mat-raised-button color="primary" class="text-white px-4 py-2">
+              Learn More
+            </button>
+          </div>
+        </div>
       </div>
     </ngx-slick-carousel>
-</div>
-
-<!-- Product Categories Section -->
-<!-- Product Categories Section -->
-<div class="product-categories mt-8">
-    <!-- <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold">Shop by Categories</h2>
-    </div> -->
+  </div>
   
-    <!-- Slick Carousel for Categories -->
+  <!-- Product Categories Section -->
+  <div class="product-categories mt-8">
     <div class="category-carousel">
       <ngx-slick-carousel class="carousel" [config]="categoryCarouselConfig">
         <div *ngFor="let category of categories" ngxSlickItem>
@@ -27,35 +30,28 @@
   </div>
   
   <!-- Plug into New Tech Section -->
-<div class="mt-8 mx-auto w-full">
-    <!-- <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold">Plug into New Tech</h2>
-    </div> -->
-  
+  <div class="mt-8 mx-auto w-full">
     <ngx-slick-carousel class="carousel" [config]="techCarouselConfig">
       <div *ngFor="let tech of newTechItems" ngxSlickItem class="px-2">
-        <!-- Circular card with image and name under it -->
         <div class="flex flex-col items-center">
-          <!-- Circular image -->
-          <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg mb-1"> <!-- Reduced margin further -->
+          <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg mb-1">
             <img [src]="tech.image" alt="{{ tech.name }}" class="w-full h-full object-cover">
           </div>
-          <!-- Name under the image -->
           <h3 class="text-lg font-semibold">{{ tech.name }}</h3>
         </div>
       </div>
     </ngx-slick-carousel>
   </div>
   
+  <!-- Banner Section -->
   <div class="mt-6 mx-auto w-full">
-      <div >
-        <img src="images/1.jpg" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
-      </div>
+    <div>
+      <img src="images/1.jpg" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
+    </div>
   </div>
   
-
   <!-- Featured Products Section -->
-<div class="mt-6 mx-auto w-full ">
+  <div class="mt-6 mx-auto w-full">
     <h2 class="text-xl font-semibold mb-4">Featured Products</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       <div *ngFor="let product of featuredProducts" class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transform transition-all">
@@ -64,12 +60,12 @@
         <p class="mt-1 text-sm text-gray-600">{{ product.price }}</p>
       </div>
     </div>
-</div>
+  </div>
   
-<div class="mt-6 mx-auto w-full">
-    <div >
+  <!-- Another Banner Section -->
+  <div class="mt-6 mx-auto w-full mb-8">
+    <div>
       <img src="images/1.jpg" alt="Banner" class="w-full h-80 object-cover rounded-lg shadow-lg">
     </div>
-</div>
-
+  </div>
   

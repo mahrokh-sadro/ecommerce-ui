@@ -1,54 +1,93 @@
 <div *ngIf="isLoading" class="flex justify-center items-center min-h-screen">
-  <app-loading-icon ></app-loading-icon>
+  <app-loading-icon></app-loading-icon>
 </div>
 
-<div *ngIf="!isLoading">
-  <div class="flex flex-col gap-4 mb-2">
-    <div class="flex justify-end  gap-2">
-         <button mat-stroked-button (click)="openFilterDialog()">
-             <mat-icon>filter_list</mat-icon>
-             Filters
-         </button>
-         <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sort</button>
+<div *ngIf="!isLoading" class="p-4">
+
+  <!-- Search Bar & Filters -->
+  <div class="flex flex-col md:flex-row gap-4 mb-4 items-center justify-center">
+    
+    <!-- Centered Search Bar -->
+    <div class="flex w-full md:max-w-2xl border rounded-full overflow-hidden shadow-md">
+      
+      <!-- Empty Gray Space -->
+      <div class="w-8"></div>
+
+      <!-- Search Input -->
+      <input 
+        [(ngModel)]="searchTerm"
+        (keyup)="onSearch()"
+        type="text" 
+        placeholder="Search for anything..." 
+        class="px-4 py-2 focus:outline-none border-r border-gray-300 flex-grow" 
+      />
+
+      <!-- Search Button -->
+      <button (click)="onSearch()" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 flex items-center justify-center" style="background-color: #9c4dcc ;">
+        <mat-icon>search</mat-icon>
+      </button>
     </div>
- </div>
- 
- <div class="grid grid-cols-5 gap-4">
-     <mat-card class="example-card cursor-pointer" appearance="outlined" *ngFor="let product of paginatedProducts" routerLink="{{product.id}}">
-         <img
-           mat-card-image
-           src="{{'images/'+product.image}}"
-           alt="{{product.image}}"
-         />
-         <mat-card-content>
-           <h2 
-           >{{product.name}}</h2>
-           <p class="font-light">{{product.price | currency}}</p>
-         </mat-card-content>
-          <mat-card-actions (click)="$event.stopPropagation()" *ngIf="!product.isClicked">
-             <button mat-stroked-button class="w-full" (click)="addItemToCart(product);">
-                <span ><mat-icon>add_shopping_cart</mat-icon>
-                Add to cart</span>
-             </button>
-         </mat-card-actions>
-         <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full">
-          In cart
-        </span>     </mat-card>
-     <!-- Add more mat-cards here as needed -->
- </div>
- <mat-paginator
-   [length]="products?.length"
-   [pageSize]="pageSize"
-   [showFirstLastButtons]="true"
-   [pageSizeOptions]="[5, 10, 15]"
-   (page)="onPageChange($event)"
-   aria-label="Select page">
- </mat-paginator>
+
+    <!-- Filter & Sort Buttons -->
+    <div class="flex gap-2">
+      <button mat-stroked-button class="rounded-lg flex items-center" (click)="openFilterDialog()">
+        <mat-icon>filter_list</mat-icon>
+        Filters
+      </button>
+      <button mat-stroked-button class="rounded-lg flex items-center" [matMenuTriggerFor]="beforeMenu">
+        Sort
+      </button>
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <mat-card 
+      class="example-card cursor-pointer" 
+      appearance="outlined" 
+      *ngFor="let product of paginatedProducts" 
+      routerLink="{{product.id}}">
+
+      <img
+        mat-card-image
+        src="{{'images/'+product.image}}"
+        alt="{{product.image}}"
+        class="w-full h-48 object-cover"
+      />
+
+      <mat-card-content>
+        <h2 class="text-lg font-semibold">{{product.name}}</h2>
+        <p class="font-light">{{product.price | currency}}</p>
+      </mat-card-content>
+
+      <mat-card-actions (click)="$event.stopPropagation()" *ngIf="!product.isClicked">
+        <button mat-stroked-button class="w-full rounded-lg" (click)="addItemToCart(product);">
+          <span><mat-icon>add_shopping_cart</mat-icon> Add to cart</span>
+        </button>
+      </mat-card-actions>
+
+      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full">
+        In cart
+      </span>
+
+    </mat-card>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center mt-6">
+    <mat-paginator
+      [length]="products?.length"
+      [pageSize]="pageSize"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="[5, 10, 15]"
+      (page)="onPageChange($event)"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+
 </div>
 
-
-
-
+<!-- Sort Menu -->
 <mat-menu #beforeMenu="matMenu" xPosition="before">
   <mat-selection-list [multiple]="false" (selectionChange)="onSortChange($event)">
     @for (sort of sortOptions; track $index) {
