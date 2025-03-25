@@ -41,37 +41,72 @@
   </div>
 
   <!-- Product Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-    <mat-card 
-      class="example-card cursor-pointer" 
-      appearance="outlined" 
-      *ngFor="let product of paginatedProducts" 
-      routerLink="{{product.id}}">
-
-      <img
-        mat-card-image
-        [src]="'images/'+product.image"
-        alt="{{product.image}}"
-        class="w-full h-48 object-cover"
-      />
-
-      <mat-card-content>
-        <h2 class="text-lg font-semibold">{{product.name}}</h2>
-        <p class="font-light">{{product.price | currency}}</p>
-      </mat-card-content>
-
-      <mat-card-actions (click)="$event.stopPropagation()" *ngIf="!product.isClicked">
-        <button mat-stroked-button class="w-full rounded-lg" (click)="addItemToCart(product);">
-          <span><mat-icon>add_shopping_cart</mat-icon> Add to cart</span>
-        </button>
-      </mat-card-actions>
-
-      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full">
+  <div class="grid grid-cols-3 gap-4">
+    <!-- First row: 3 items -->
+    <div *ngFor="let product of paginatedProducts.slice(0, 3)" class="text-center relative">
+      <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
+      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
+  
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <span><mat-icon>add_shopping_cart</mat-icon></span>
+      </div>
+  
+      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
         In cart
       </span>
-
-    </mat-card>
+    </div>
   </div>
+  
+  <!-- Second row: 2 items -->
+  <div class="grid grid-cols-2 gap-4">
+    <div *ngFor="let product of paginatedProducts.slice(3, 5)" class="text-center relative">
+      <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
+      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
+  
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <span><mat-icon>add_shopping_cart</mat-icon></span>
+      </div>
+  
+      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        In cart
+      </span>
+    </div>
+  </div>
+  
+  <!-- Third row: 3 items -->
+  <div class="grid grid-cols-3 gap-4">
+    <div *ngFor="let product of paginatedProducts.slice(5, 8)" class="text-center relative">
+      <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
+      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
+  
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <span><mat-icon>add_shopping_cart</mat-icon></span>
+      </div>
+  
+      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        In cart
+      </span>
+    </div>
+  </div>
+  
+  <!-- Fourth row: 2 items -->
+  <div class="grid grid-cols-2 gap-4">
+    <div *ngFor="let product of paginatedProducts.slice(8, 10)" class="text-center relative">
+      <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
+      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
+  
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <span><mat-icon>add_shopping_cart</mat-icon></span>
+      </div>
+  
+      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        In cart
+      </span>
+    </div>
+  </div>
+  
+
+
 
   <!-- Pagination -->
   <div class="flex justify-center mt-6">
@@ -79,7 +114,6 @@
       [length]="products?.length"
       [pageSize]="pageSize"
       [showFirstLastButtons]="true"
-      [pageSizeOptions]="[5, 10, 15]"
       (page)="onPageChange($event)"
       aria-label="Select page">
     </mat-paginator>

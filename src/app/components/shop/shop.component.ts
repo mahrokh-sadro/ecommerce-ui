@@ -101,7 +101,7 @@ export class ShopComponent {
     }
 
     paginatedProducts: any[] = []; // Subset for current page
-    pageSize = 10;
+    pageSize = 16;
     currentPage = 0;
 
     onPageChange(event: PageEvent) {
