@@ -41,70 +41,72 @@
   </div>
 
   <!-- Product Grid -->
-  <div class="grid grid-cols-3 gap-4">
-    <!-- First row: 3 items -->
-    <div *ngFor="let product of paginatedProducts.slice(0, 3)" class="text-center relative">
+<div class="grid grid-cols-3 gap-4 mb-8">
+  <div *ngFor="let product of paginatedProducts.slice(0, 3)" class="text-center relative">
+    <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
-      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
-  
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <span><mat-icon>add_shopping_cart</mat-icon></span>
-      </div>
-  
-      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+    </a>
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+      <h2 class="text-sm font-semibold">{{ product.name }}</h2>
+      <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
+      <span *ngIf="product.isClicked" class="text-right ">
         In cart
       </span>
     </div>
   </div>
-  
-  <!-- Second row: 2 items -->
-  <div class="grid grid-cols-2 gap-4">
-    <div *ngFor="let product of paginatedProducts.slice(3, 5)" class="text-center relative">
+</div>
+
+<!-- Second row: 2 items -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+  <div *ngFor="let product of paginatedProducts.slice(3, 5)" class="text-center relative">
+    <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
-      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
-  
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <span><mat-icon>add_shopping_cart</mat-icon></span>
-      </div>
-  
-      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+    </a>
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+      <h2 class="text-sm font-semibold">{{ product.name }}</h2>
+      <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
+      <span *ngIf="product.isClicked" class="text-right ">
         In cart
       </span>
     </div>
   </div>
-  
-  <!-- Third row: 3 items -->
-  <div class="grid grid-cols-3 gap-4">
-    <div *ngFor="let product of paginatedProducts.slice(5, 8)" class="text-center relative">
+</div>
+
+<!-- Third row: 3 items -->
+<div class="grid grid-cols-3 gap-4 mb-8">
+  <div *ngFor="let product of paginatedProducts.slice(5, 8)" class="text-center relative">
+    <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
-      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
-  
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <span><mat-icon>add_shopping_cart</mat-icon></span>
-      </div>
-  
-      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+    </a>
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+      <h2 class="text-sm font-semibold">{{ product.name }}</h2>
+      <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
+      <span *ngIf="product.isClicked" class="text-right ">
         In cart
       </span>
     </div>
   </div>
-  
-  <!-- Fourth row: 2 items -->
-  <div class="grid grid-cols-2 gap-4">
-    <div *ngFor="let product of paginatedProducts.slice(8, 10)" class="text-center relative">
+</div>
+
+<!-- Fourth row: 2 items -->
+<div class="grid grid-cols-2 gap-4">
+  <div *ngFor="let product of paginatedProducts.slice(8, 10)" class="text-center relative">
+    <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
-      <h2 class="mt-2 text-sm font-semibold">{{ product.name }}</h2>
-  
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <span><mat-icon>add_shopping_cart</mat-icon></span>
-      </div>
-  
-      <span *ngIf="product.isClicked" class="text-center text-green-600 font-semibold mt-2 w-full absolute bottom-4 left-1/2 transform -translate-x-1/2">
+    </a>
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+      <h2 class="text-sm font-semibold">{{ product.name }}</h2>
+      <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
+      <span *ngIf="product.isClicked" class="text-right ">
         In cart
       </span>
     </div>
+   
   </div>
-  
+</div>
+
+
+
 
 
 
@@ -114,6 +116,7 @@
       [length]="products?.length"
       [pageSize]="pageSize"
       [showFirstLastButtons]="true"
+      [pageSizeOptions]="[5, 10, 15]"
       (page)="onPageChange($event)"
       aria-label="Select page">
     </mat-paginator>
