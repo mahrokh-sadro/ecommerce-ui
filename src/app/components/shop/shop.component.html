@@ -41,7 +41,7 @@
   </div>
 
   <!-- Product Grid -->
-<div class="grid grid-cols-3 gap-4 mb-8">
+<div class="grid grid-cols-3 gap-4 mb-12">
   <div *ngFor="let product of paginatedProducts.slice(0, 3)" class="text-center relative">
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
@@ -57,7 +57,7 @@
 </div>
 
 <!-- Second row: 2 items -->
-<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="grid grid-cols-2 gap-4 mb-12">
   <div *ngFor="let product of paginatedProducts.slice(3, 5)" class="text-center relative">
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
@@ -73,7 +73,7 @@
 </div>
 
 <!-- Third row: 3 items -->
-<div class="grid grid-cols-3 gap-4 mb-8">
+<div class="grid grid-cols-3 gap-4 mb-12">
   <div *ngFor="let product of paginatedProducts.slice(5, 8)" class="text-center relative">
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />

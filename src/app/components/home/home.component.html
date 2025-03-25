@@ -21,7 +21,7 @@
       <ngx-slick-carousel class="carousel" [config]="categoryCarouselConfig" class="gap-2">
         <div *ngFor="let category of featured1" ngxSlickItem>
           <div class="category-card text-center">
-            <img [src]="category.image" alt="{{ category.name }}" class="w-full h-80 object-cover" style="height: 300px !important; ">
+            <img [src]="category.image" alt="{{ category.name }}" class="w-full h-100 object-cover" style="height: 300px !important; ">
             <h3 class="mt-2 text-sm !text-sm">{{ category.name }}</h3>
           </div>
         </div>

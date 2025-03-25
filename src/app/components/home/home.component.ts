@@ -34,19 +34,19 @@ export class HomeComponent {
   
 
   featured1 = [
-    { name: 'furniture', image: 'images/furniture.jpg' },
-    { name: 'headphone', image: 'images/headphone.jpg' },
-    { name: 'kids', image: 'images/kids.jpg' },
-    { name: 'earrings', image: 'images/earings.jpg' },
-    { name: 'bath', image: 'images/bath.jpg' },
-    { name: 'kitchen', image: 'images/kitchen.jpg' },
+    { name: 'furniture', image: 'images/b1.jpg' },
+    { name: 'headphone', image: 'images/b2.jpg' },
+    { name: 'kids', image: 'images/b3.jpg' },
+    { name: 'earrings', image: 'images/b4.jpg' },
+    { name: 'bath', image: 'images/b5.jpg' },
+    { name: 'kitchen', image: 'images/b6.jpg' },
     { name: 'bedding', image: 'images/bedding.jpg' },
     // { name: 'Furniture', image: 'images/8.jpg' },
   ];
 
   // Slick carousel config for categories
   categoryCarouselConfig = {
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,

@@ -7,14 +7,14 @@
   
     .category-card {
       width: 350px;    // Make the card wider
-      height: 250px;   // Make the card shorter
+      height: 350px;   // Make the card shorter
       text-align: center;
       overflow: hidden;
     }
   
     .category-card img {
       width: 100%;        // Make the image take full width of the card
-      height: 70%;        // Make image take 70% of the card height
+      height: 90%;        // Make image take 70% of the card height
       object-fit: cover;  // Ensure the image doesn't stretch
     }
   
