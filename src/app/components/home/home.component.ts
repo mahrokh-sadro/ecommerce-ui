@@ -16,9 +16,9 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class HomeComponent {
   banners = [
-    { image: 'images/1.jpg', name: 'Tech Product 1', description: 'This is a description of product 1' },
-    { image: 'images/2.jpg', name: 'Tech Product 2', description: 'This is a description of product 2' },
-    { image: 'images/3.jpg', name: 'Tech Product 3', description: 'This is a description of product 3' }
+    { image: 'images/banner1.jpg', name: 'Tech Product 1', description: 'This is a description of product 1' },
+    { image: 'images/banner2.jpg', name: 'Tech Product 2', description: 'This is a description of product 2' },
+    { image: 'images/banner3.jpg', name: 'Tech Product 3', description: 'This is a description of product 3' }
   ];
 
   slideConfig = {
@@ -34,19 +34,19 @@ export class HomeComponent {
   
 
   categories = [
-    { name: 'Electronics', image: 'images/1.jpg' },
-    { name: 'Fashion', image: 'images/2.jpg' },
-    { name: 'Home Goods', image: 'images/3.jpg' },
-    { name: 'Toys', image: 'images/4.jpg' },
-    { name: 'Beauty', image: 'images/5.jpg' },
-    { name: 'Sports', image: 'images/6.jpg' },
-    { name: 'Books', image: 'images/7.jpg' },
-    { name: 'Furniture', image: 'images/8.jpg' },
+    { name: 'furniture', image: 'images/furniture.jpg' },
+    { name: 'headphone', image: 'images/headphone.jpg' },
+    { name: 'kids', image: 'images/kids.jpg' },
+    { name: 'earrings', image: 'images/earings.jpg' },
+    { name: 'bath', image: 'images/bath.jpg' },
+    { name: 'kitchen', image: 'images/kitchen.jpg' },
+    { name: 'bedding', image: 'images/bedding.jpg' },
+    // { name: 'Furniture', image: 'images/8.jpg' },
   ];
 
   // Slick carousel config for categories
   categoryCarouselConfig = {
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -77,62 +77,46 @@ export class HomeComponent {
   };
 
   featuredProducts = [
-    { name: 'Smartphone', image: 'images/1.jpg', price: '$499' },
-    { name: 'Headphones', image: 'images/2.jpg', price: '$199' },
-    { name: 'Laptop', image: 'images/3.jpg', price: '$899' },
-    { name: 'Watch', image: 'images/4.jpg', price: '$159' },
-    { name: 'Tablet', image: 'images/5.jpg', price: '$299' }
+    { name: 'Smartphone', image: 'images/c1.jpg', price: '$499' },
+    { name: 'Headphones', image: 'images/c2.jpg', price: '$199' },
+    { name: 'Laptop', image: 'images/c3.jpg', price: '$899' },
+    { name: 'Watch', image: 'images/c4.jpg', price: '$159' },
+    // { name: 'Tablet', image: 'images/5.jpg', price: '$299' }
   ];
 
   newTechItems = [
     { 
-      name: 'Smartphone', 
-      description: 'Latest smartphone with advanced features.', 
-      price: '$999', 
-      image: 'images/7.jpg' 
+      name: 'furniture', 
+      image: 'images/furniture.jpg' 
     },
     { 
-      name: 'Laptop', 
-      description: 'High-performance laptop for professionals.', 
-      price: '$1200', 
-      image: 'images/6.jpg' 
+      name: 'headphone', 
+      image: 'images/headphone.jpg' 
     },
     { 
-      name: 'Smartwatch', 
-      description: 'Wearable smartwatch for daily use.', 
-      price: '$300', 
-      image: 'images/2.jpg' 
+      name: 'kids', 
+      image: 'images/kids.jpg' 
     },
     { 
-      name: 'Headphones', 
-      description: 'Noise-cancelling over-ear headphones.', 
-      price: '$250', 
-      image: 'images/1.jpg' 
+      name: 'earrings', 
+      image: 'images/earings.jpg' 
     },
     { 
-      name: 'Smartphone', 
-      description: 'Latest smartphone with advanced features.', 
-      price: '$999', 
-      image: 'images/7.jpg' 
+      name: 'bath', 
+      image: 'images/bath.jpg' 
     },
     { 
-      name: 'Laptop', 
-      description: 'High-performance laptop for professionals.', 
-      price: '$1200', 
-      image: 'images/6.jpg' 
+      name: 'kitchen', 
+      image: 'images/kitchen.jpg' 
     },
     { 
-      name: 'Smartwatch', 
-      description: 'Wearable smartwatch for daily use.', 
-      price: '$300', 
-      image: 'images/2.jpg' 
+      name: 'bedding', 
+      image: 'images/bedding.jpg' 
     },
-    { 
-      name: 'Headphones', 
-      description: 'Noise-cancelling over-ear headphones.', 
-      price: '$250', 
-      image: 'images/1.jpg' 
-    }
+    // { 
+    //   name: 'Headphones', 
+    //   image: 'images/1.jpg' 
+    // }
   ];
 
   techCarouselConfig = {
