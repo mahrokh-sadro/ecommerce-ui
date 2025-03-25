@@ -33,7 +33,7 @@ export class HomeComponent {
   };
   
 
-  categories = [
+  featured1 = [
     { name: 'furniture', image: 'images/furniture.jpg' },
     { name: 'headphone', image: 'images/headphone.jpg' },
     { name: 'kids', image: 'images/kids.jpg' },
@@ -84,7 +84,7 @@ export class HomeComponent {
     // { name: 'Tablet', image: 'images/5.jpg', price: '$299' }
   ];
 
-  newTechItems = [
+  categories = [
     { 
       name: 'furniture', 
       image: 'images/furniture.jpg' 
