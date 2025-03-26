@@ -8,4 +8,6 @@ export interface Product{
     type:string;
     brand:string;
     isClicked:boolean;
+    isFeatured:boolean;
+    isBestSeller:boolean;
 }

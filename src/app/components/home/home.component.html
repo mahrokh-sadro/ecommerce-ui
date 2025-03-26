@@ -15,14 +15,15 @@
     </ngx-slick-carousel>
   </div>
   
-  <!-- featured1 -->
+  <!-- bestSellers -->
   <div class="product-categories mt-8">
     <div class="category-carousel">
       <ngx-slick-carousel class="carousel" [config]="categoryCarouselConfig" class="gap-2">
-        <div *ngFor="let category of featured1" ngxSlickItem>
+        <div *ngFor="let p of bestSeller" ngxSlickItem>
           <div class="category-card text-center">
-            <img [src]="category.image" alt="{{ category.name }}" class="w-full h-100 object-cover" style="height: 300px !important; ">
-            <h3 class="mt-2 text-sm !text-sm">{{ category.name }}</h3>
+            <a [routerLink]="['/products', p.id]">
+              <img [src]="'images/'+p.image" alt="{{ p.name }}" class="w-full h-100 object-cover" style="height: 300px !important; ">
+            </a>
           </div>
         </div>
       </ngx-slick-carousel>
@@ -46,7 +47,7 @@
   <!-- Banner 2 -->
   <div class="mt-6 mx-auto w-full">
     <div>
-      <img src="images/banner4.jpg" alt="Banner" class="w-full h-100 object-cover shadow-lg">
+      <img src="images/ban4.jpg" alt="Banner" class="w-full h-100 object-cover shadow-lg">
     </div>
   </div>
   
@@ -54,9 +55,10 @@
 <div class="mt-6 mx-auto w-full">
   <h2 class="text-xl font-semibold mb-4">Featured Products</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    <div *ngFor="let product of featuredProducts" class="text-center">
-      <img [src]="product.image" alt="{{ product.name }}" class="w-full h-80 object-cover">
-      <h3 class="mt-2 text-sm">{{ product.name }}</h3>
+    <div *ngFor="let product of featured" class="text-center">
+      <a [routerLink]="['/products', product.id]">
+        <img [src]="'images/' + product.image" alt="{{ product.name }}" class="w-full h-80 object-cover">
+      </a>
     </div>
   </div>
 </div>
@@ -65,7 +67,7 @@
   <!--  Banner 3 -->
   <div class="mt-6 mx-auto w-full mb-8">
     <div>
-      <img src="images/banner5.jpg" alt="Banner" class="w-full h-100 object-cover shadow-lg">
+      <img src="images/banner4.jpg" alt="Banner" class="w-full h-100 object-cover shadow-lg">
     </div>
   </div>
   
