@@ -3,7 +3,6 @@
 </div>
 
 <div *ngIf="!isLoading" class="p-4">
-
   <!-- Search Bar & Filters -->
   <div class="flex flex-col md:flex-row gap-4 mb-4 items-center justify-center">
     
@@ -23,30 +22,30 @@
       />
 
       <!-- Search Button -->
-      <button (click)="onSearch()" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 flex items-center justify-center" style="background-color: #9c4dcc ;">
-        <mat-icon>search</mat-icon>
+      <button (click)="onSearch()" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 flex items-center justify-center" style="background-color: #efefef;">
+        <mat-icon style="color: black;">search</mat-icon>
       </button>
     </div>
 
     <!-- Filter & Sort Buttons -->
-    <div class="flex gap-2">
-      <button mat-stroked-button class="rounded-lg flex items-center" (click)="openFilterDialog()">
-        <mat-icon>filter_list</mat-icon>
+    <div class="flex gap-2 justify-center md:justify-start">
+      <button mat-button class="rounded-lg flex items-center !text-black" (click)="openFilterDialog()">
+        <mat-icon>tune</mat-icon>
         Filters
       </button>
-      <button mat-stroked-button class="rounded-lg flex items-center" [matMenuTriggerFor]="beforeMenu">
+      <button mat-button class="rounded-lg flex items-center !text-black" [matMenuTriggerFor]="beforeMenu">
+        <mat-icon>swap_vert</mat-icon>
         Sort
       </button>
     </div>
   </div>
-
   <!-- Product Grid -->
 <div class="grid grid-cols-3 gap-4 mb-12">
   <div *ngFor="let product of paginatedProducts.slice(0, 3)" class="text-center relative">
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
     </a>
-    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between mt-2">
       <h2 class="text-sm font-semibold">{{ product.name }}</h2>
       <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
       <span *ngIf="product.isClicked" class="text-right ">
@@ -62,7 +61,7 @@
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
     </a>
-    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between mt-2">
       <h2 class="text-sm font-semibold">{{ product.name }}</h2>
       <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
       <span *ngIf="product.isClicked" class="text-right ">
@@ -78,7 +77,7 @@
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
     </a>
-    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between mt-2">
       <h2 class="text-sm font-semibold">{{ product.name }}</h2>
       <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
       <span *ngIf="product.isClicked" class="text-right ">
@@ -94,7 +93,7 @@
     <a [routerLink]="['/products', product.id]">
       <img [src]="'images/' + product.image" alt="{{ product.image }}" class="w-full h-100 object-cover" />
     </a>
-    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between">
+    <div class="absolute left-1/2 transform -translate-x-1/2 w-full px-4 flex justify-between mt-2">
       <h2 class="text-sm font-semibold">{{ product.name }}</h2>
       <button *ngIf="!product.isClicked" (click)="addItemToCart(product)" class="cursor-pointer"><mat-icon>add_shopping_cart</mat-icon></button>
       <span *ngIf="product.isClicked" class="text-right ">
@@ -105,18 +104,12 @@
   </div>
 </div>
 
-
-
-
-
-
   <!-- Pagination -->
   <div class="flex justify-center mt-6">
     <mat-paginator
       [length]="products?.length"
       [pageSize]="pageSize"
       [showFirstLastButtons]="true"
-      [pageSizeOptions]="[5, 10, 15]"
       (page)="onPageChange($event)"
       aria-label="Select page">
     </mat-paginator>

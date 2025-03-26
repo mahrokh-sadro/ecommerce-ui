@@ -1,3 +1,35 @@
+/* Header Background */
+header {
+    background: #efefef; /* Light gray background */
+    padding: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Styles */
+nav {
+    font-size: 1.125rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: black; /* Default color */
+    font-weight: normal; /* Normal weight */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+}
+
+nav a.active {
+    color: black; /* Keep text black */
+    font-weight: bold; /* Make it bold when active */
+}
+
+nav a:hover {
+    color: #374151; /* Slightly darker gray on hover */
+}
+
+/* Custom Badge Styling */
 .custom-badge .mat-icon {
     width: 32px; 
     height: 32px;
@@ -11,50 +43,33 @@
     padding-top: 5px;
 }
 
-a {
-    &.active {
-        color: #4f46e5;
-    }
-
-    &:hover {
-        color: #c7d2fe; 
-    }
-}
-
-header {
-    background: linear-gradient(to right, #4f46e5, #3b82f6); 
-}
-
-nav {
-    font-size: 1.125rem; 
-    letter-spacing: 0.5px; 
-}
-
-nav a {
-    transition: color 0.3s ease-in-out;
-}
-
-nav a:hover {
-    color: #c7d2fe; 
-}
-
+/* Buttons */
 button {
     transition: all 0.3s ease-in-out;
+    color: black;
+    background: transparent;
+    border: 1px solid #9ca3af;
+    padding: 8px 16px;
+    // border-radius: 6px;
+    cursor: pointer;
 }
 
 button:hover {
-    color: #c7d2fe;
+    background: #9ca3af;
+    color: black;
 }
 
+/* Dropdown Menu */
 .mat-menu-item {
     padding: 10px 20px;
     transition: background-color 0.3s ease;
 }
 
 .mat-menu-item:hover {
-    background-color: #f3f4f6;
+    background-color: #d1d5db; /* Lighter gray on hover */
 }
 
+/* Mobile Responsive */
 @media screen and (max-width: 768px) {
     .flex {
         flex-direction: column;
@@ -62,5 +77,6 @@ button:hover {
     }
     nav {
         flex-direction: column;
+        gap: 1rem;
     }
 }
