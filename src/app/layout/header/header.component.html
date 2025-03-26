@@ -37,6 +37,10 @@
 
 <!-- Menu for logged-in users -->
 <mat-menu #menu="matMenu">
+  <button *appIsAdmin  mat-menu-item routerLink="/admin" class="hover:bg-gray-100 transition-colors p-2 rounded-md">
+      <mat-icon>admin_panel_settings</mat-icon>
+      <span>Admin Dashboard</span>
+  </button>
   <button mat-menu-item routerLink="/cart" class="hover:bg-gray-100 transition-colors p-2 rounded-md">
       <mat-icon>shopping_cart</mat-icon>
       <span>My Cart</span>

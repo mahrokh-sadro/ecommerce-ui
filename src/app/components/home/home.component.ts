@@ -3,13 +3,14 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CommonModule, NgFor } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 
+
 @Component({
   selector: 'app-home',
   imports: [
     SlickCarouselModule,
     CommonModule,
     NgFor ,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

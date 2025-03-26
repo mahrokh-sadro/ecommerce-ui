@@ -11,6 +11,8 @@ import { authGuard } from './auth.guard';
 import { cartGuard } from './cart.guard';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { adminGuard } from './admin.guard';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -23,5 +25,6 @@ export const routes: Routes = [
     {path:'user/register',component:RegisterComponent},
     {path:'orders' , component:OrdersComponent},
     {path:'orders/:id' , component:OrderDetailsComponent},
+    {path:'admin' , component:AdminComponent,canActivate:[adminGuard]},
 
 ];

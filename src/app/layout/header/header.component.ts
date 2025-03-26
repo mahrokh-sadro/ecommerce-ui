@@ -4,6 +4,7 @@ import {MatButton} from '@angular/material/button';
 import {MatBadge} from '@angular/material/badge';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
+import { IsAdminDirective } from '../../is-admin.directive';
 
 
 import { CartService } from '../../services/cart.service';
@@ -17,7 +18,8 @@ import { UserService } from '../../services/user.service';
     MatBadge,
     RouterLink,
     RouterLinkActive,
-    MatMenuModule
+    MatMenuModule,
+    IsAdminDirective
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
