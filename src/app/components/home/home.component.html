@@ -4,11 +4,11 @@
         <div class="relative w-full h-150">
           <img [src]="banner.image" alt="Banner" class="w-full h-full object-cover">
           <div class="absolute inset-0 flex flex-col justify-center items-start p-4 rounded-lg">
-            <h3 class="text-2xl font-semibold text-white mb-2">{{ banner.name }}</h3>
+            <!-- <h3 class="text-2xl font-semibold text-white mb-2">{{ banner.name }}</h3>
             <p class="text-sm text-white mb-4">{{ banner.description }}</p>
             <button mat-raised-button color="primary" class="text-white px-4 py-2">
               Learn More
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -32,13 +32,15 @@
   
   <!-- categories -->
   <div class="mt-8 mx-auto w-full">
-    <ngx-slick-carousel class="carousel" [config]="techCarouselConfig">
-      <div *ngFor="let tech of categories" ngxSlickItem class="px-2">
+    <ngx-slick-carousel class="carousel" [config]="typeCarouselConfig">
+      <div *ngFor="let type of types" ngxSlickItem class="px-2">
         <div class="flex flex-col items-center">
           <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg mb-1">
-            <img [src]="tech.image" alt="{{ tech.name }}" class="w-full h-full object-cover">
+            <a (click)="redirectToCategory(type)">
+               <img [src]="'images/'+ type + '.jpg'" alt="{{ type }}" class="w-full h-full object-cover">
+            </a>
           </div>
-          <h3 class="text-sm font-semibold">{{ tech.name }}</h3>
+          <h3 class="text-sm font-semibold">{{ type }}</h3>
         </div>
       </div>
     </ngx-slick-carousel>
@@ -51,9 +53,8 @@
     </div>
   </div>
   
-  <!-- Featured2 -->
+  <!-- Featured -->
 <div class="mt-6 mx-auto w-full">
-  <h2 class="text-xl font-semibold mb-4">Featured Products</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
     <div *ngFor="let product of featured" class="text-center">
       <a [routerLink]="['/products', product.id]">

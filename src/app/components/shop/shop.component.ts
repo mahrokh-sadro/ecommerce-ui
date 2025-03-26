@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component,inject, ViewChild  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 import {MatButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
@@ -62,11 +63,17 @@ export class ShopComponent {
     cart: Cart | null = null;
     isLoading:boolean=false;
     searchTerm: string = '';
+    private router=inject(ActivatedRoute);
+    category:string="";
 
     ngOnInit() {
-      this.getProducts();
       this.getTypes();
       this.getBrands();
+      this.router.queryParams.subscribe(params => {
+        this.category = params['category'];
+        console.log(this.category);
+        this.getProducts(this.category);
+      });
     }
 
     ngAfterViewInit() {
@@ -85,11 +92,17 @@ export class ShopComponent {
       })
     }
 
-    getProducts(){
+    getProducts(category:string){
       this.isLoading=true;
       this.productService.getProducts().subscribe({
         next:(data:any)=>{
-          this.products=data;
+          if(category){
+            this.products=data.filter((p:Product)=>p.type==category);
+          }else{
+            this.products=data;
+          }
+          console.log( this.products)
+          console.log( 'category',category)
           this.updatePaginatedProducts();
           this.isLoading=false;
         },
