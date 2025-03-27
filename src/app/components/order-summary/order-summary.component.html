@@ -27,7 +27,7 @@
     </div>
 
       @if(cartService.totalCartItems()>0 && location.path()!='/checkout'){
-        <button mat-button [routerLink]="'/checkout'" color="primary" class="w-full mt-4 !bg-gray-500 text-white py-2 rounded-md hover:bg-blue-700">
+        <button mat-button [routerLink]="'/checkout'" color="primary" class="w-full mt-4 text-white py-2 rounded-md cursor-pointer button_color">
           Proceed to Checkout
         </button>
       }

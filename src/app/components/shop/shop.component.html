@@ -3,16 +3,9 @@
 </div>
 
 <div *ngIf="!isLoading" class="p-4">
-  <!-- Search Bar & Filters -->
   <div class="flex flex-col md:flex-row gap-4 mb-4 items-center justify-center">
-    
-    <!-- Centered Search Bar -->
-    <div class="flex w-full md:max-w-2xl border rounded-full overflow-hidden shadow-md">
-      
-      <!-- Empty Gray Space -->
-      <div class="w-8"></div>
-
-      <!-- Search Input -->
+        <div class="flex w-full md:max-w-2xl border rounded-full overflow-hidden shadow-md">
+            <div class="w-8"></div>
       <input 
         [(ngModel)]="searchTerm"
         (keyup)="onSearch()"
@@ -21,13 +14,11 @@
         class="px-4 py-2 focus:outline-none border-r border-gray-300 flex-grow" 
       />
 
-      <!-- Search Button -->
-      <button (click)="onSearch()" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 flex items-center justify-center" style="background-color: #efefef;">
+      <button (click)="onSearch()" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 flex items-center justify-center cursor-pointer" style="background-color: #efefef;">
         <mat-icon style="color: black;">search</mat-icon>
       </button>
     </div>
 
-    <!-- Filter & Sort Buttons -->
     <div class="flex gap-2 justify-center md:justify-start">
       <button mat-button class="rounded-lg flex items-center !text-black" (click)="openFilterDialog()">
         <mat-icon>tune</mat-icon>
