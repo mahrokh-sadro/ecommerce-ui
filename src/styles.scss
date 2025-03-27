@@ -8,3 +8,23 @@
     background-color:#333!important;
 }
  
+.mat-mdc-unelevated-button:not(:disabled) {
+    color: white !important;
+    background-color: #a08862 !important;
+}
+
+.mat-mdc-unelevated-button:hover {
+    color: white !important;
+    background-color:#333!important;
+
+}
+
+  .mat-step-icon {
+    background-color: #c1a57b !important;  /* Step circle background */
+    color: white !important;  /* Step circle text color */
+  }
+  
+  .mat-stepper-horizontal-line {
+    border-top-color: #a08862 !important; /* Line between steps */
+  }
+  
