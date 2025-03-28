@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^19.1.0",
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
+    "@microsoft/signalr": "^8.0.7",
     "@stripe/stripe-js": "^6.0.0",
     "@tailwindcss/postcss": "^4.0.9",
     "jquery": "^3.7.1",
