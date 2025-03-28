@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product';
+import { LoadingIconComponent } from '../../loading-icon/loading-icon.component';
 
 @Component({
   selector: 'app-product-details',
@@ -30,7 +31,8 @@ import { Product } from '../../../models/product';
     MatButtonToggleModule,
     MatSelectModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
+    LoadingIconComponent
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
@@ -42,17 +44,23 @@ export class ProductDetailsComponent {
     product:any;
     quantity:number=1;
     cartService=inject(CartService);
-    
+    isLoading:boolean = false;
+
     constructor(){
-       console.log('ccc',this.cartService.cart())
     }
 
     ngOnInit(){
+      this.isLoading=true;
       this.productId=this.route.snapshot.paramMap.get('id');
       if(this.productId){
         this.productService.getProductById(+this.productId).subscribe({
            next:(data:any)=>{
              this.product=data;
+             this.isLoading=false;
+           },
+           error: (err)=>{
+            console.log(err);
+            this.isLoading=false;
            }
         })
       }

@@ -4,6 +4,7 @@ import { Router,RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { LoadingIconComponent } from '../../components/loading-icon/loading-icon.component';
 
 @Component({
   selector: 'app-success',
@@ -11,7 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     RouterLink,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    LoadingIconComponent
   ],
   templateUrl: './success.component.html',
   styleUrl: './success.component.scss'
@@ -23,8 +25,6 @@ export class SuccessComponent {
 
     ngOnInit() {
       this.router.queryParams.subscribe(params => {
-        console.log('Order ID:-->', params['orderId']);
-        console.log('Total:--->', params['total']);
         this.orderId=params['orderId'];
         this.total=params['total'];
       });

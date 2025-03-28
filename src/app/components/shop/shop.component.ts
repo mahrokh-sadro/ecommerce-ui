@@ -70,7 +70,7 @@ export class ShopComponent {
       this.getTypes();
       this.getBrands();
       this.router.queryParams.subscribe(params => {
-        this.category = params['category'];
+        this.category = params['category'].toLowerCase();
         console.log(this.category);
         this.getProducts(this.category);
       });
@@ -97,7 +97,7 @@ export class ShopComponent {
       this.productService.getProducts().subscribe({
         next:(data:any)=>{
           if(category){
-            this.products=data.filter((p:Product)=>p.type==category);
+            this.products=data.filter((p:Product)=>p.type.toLowerCase()==category);
           }else{
             this.products=data;
           }

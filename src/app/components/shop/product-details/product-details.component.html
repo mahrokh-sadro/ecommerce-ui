@@ -1,4 +1,9 @@
-@if(product) {
+@if(isLoading){
+    <div class="w-full h-screen flex justify-center items-center">
+        <app-loading-icon></app-loading-icon>
+    </div>   
+}
+@else if(!isLoading && product) {
     <div class="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 gap-8 p-6 mx-auto">
         
         <div class="flex items-center justify-center col-span-1 md:col-span-2">
@@ -45,5 +50,10 @@
                 <h3 class="text-base font-medium">Type: <span class="font-normal">{{ product.type }}</span></h3>
             </div>             
         </div>
+    </div>
+}
+@else{
+    <div class="w-full h-screen flex justify-center items-center">
+        No data found
     </div>
 }

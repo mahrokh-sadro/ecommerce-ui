@@ -36,7 +36,7 @@
       <div *ngFor="let type of types" ngxSlickItem class="px-2">
         <div class="flex flex-col items-center">
           <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg mb-1">
-            <a (click)="redirectToCategory(type)">
+            <a (click)="redirectToCategory(type)" class="cursor-pointer">
                <img [src]="'images/'+ type + '.jpg'" alt="{{ type }}" class="w-full h-full object-cover">
             </a>
           </div>

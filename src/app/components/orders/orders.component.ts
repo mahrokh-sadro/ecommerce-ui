@@ -34,18 +34,22 @@ export class OrdersComponent {
   isLoading:boolean=false;
 
   ngOnInit(){
-    
+    this.isLoading=true;
      this.orderService.getOrders().subscribe(data=>{
-      this.isLoading=true;
       console.log('myorders',data);
       this.orderService.orders.set(data);
       this.dataSource.data = this.orderService.orders() ?? [];
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 100);
       this.isLoading=false;
      })
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+    }, 100);
   }
 
 }
