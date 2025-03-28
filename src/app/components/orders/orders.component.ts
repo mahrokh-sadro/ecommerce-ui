@@ -8,6 +8,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 import { OrderService } from '../../order.service';
 import { MatCardModule } from '@angular/material/card';
+import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 
 @Component({
   selector: 'app-orders',
@@ -17,7 +18,8 @@ import { MatCardModule } from '@angular/material/card';
     DatePipe,
     RouterLink,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    LoadingIconComponent
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
@@ -29,14 +31,16 @@ export class OrdersComponent {
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator)
   paginator: MatPaginator = new MatPaginator;
+  isLoading:boolean=false;
 
   ngOnInit(){
+    
      this.orderService.getOrders().subscribe(data=>{
+      this.isLoading=true;
       console.log('myorders',data);
       this.orderService.orders.set(data);
       this.dataSource.data = this.orderService.orders() ?? [];
-      // this.dataSource.paginator = this.paginator;
-
+      this.isLoading=false;
      })
   }
 
