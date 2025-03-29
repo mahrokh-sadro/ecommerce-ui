@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import {MatButton} from '@angular/material/button';
-import {MatCard} from '@angular/material/card';
 import { MatCardModule } from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -26,7 +25,6 @@ import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
   selector: 'app-shop',
   imports: [
     CommonModule,
-    MatCard,
     MatCardModule,
     MatIcon,
     MatButton,

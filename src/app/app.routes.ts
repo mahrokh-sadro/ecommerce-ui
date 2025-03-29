@@ -13,6 +13,9 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { adminGuard } from './admin.guard';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -26,5 +29,8 @@ export const routes: Routes = [
     {path:'orders' , component:OrdersComponent},
     {path:'orders/:id' , component:OrderDetailsComponent},
     {path:'admin' , component:AdminComponent,canActivate:[adminGuard]},
+    {path:'privacy-policy' , component:PrivacyPolicyComponent},
+    { path: 'terms', component: TermsOfServiceComponent },
+    { path: 'contact-us', component: ContactUsComponent },
 
 ];

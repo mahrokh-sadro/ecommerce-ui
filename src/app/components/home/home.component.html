@@ -16,7 +16,7 @@
   </div>
   
   <!-- bestSellers -->
-  <div class="product-categories mt-8">
+  <div class="product-categories !mt-6 bestSellers">
     <div class="category-carousel">
       <ngx-slick-carousel class="carousel" [config]="categoryCarouselConfig" class="gap-2">
         <div *ngFor="let p of bestSeller" ngxSlickItem>
@@ -31,7 +31,7 @@
   </div>
   
   <!-- categories -->
-  <div class="mt-8 mx-auto w-full">
+  <div class="mt-8 mx-auto w-full categories">
     <ngx-slick-carousel class="carousel" [config]="typeCarouselConfig">
       <div *ngFor="let type of types" ngxSlickItem class="px-2">
         <div class="flex flex-col items-center">
@@ -47,7 +47,7 @@
   </div>
   
   <!-- Banner 2 -->
-  <div class="mt-6 mx-auto w-full">
+  <div class="mt-12 mx-auto w-full">
     <div>
       <img src="images/ban4.jpg" alt="Banner" class="w-full h-100 object-cover shadow-lg">
     </div>

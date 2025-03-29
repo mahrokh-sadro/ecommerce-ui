@@ -5,10 +5,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
-
 import { OrderService } from '../../order.service';
 import { MatCardModule } from '@angular/material/card';
 import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
+import { map } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders',
@@ -27,11 +29,14 @@ import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 export class OrdersComponent {
   
   orderService=inject(OrderService);
-  displayedColumns: string[] = [ 'image','id', 'orderDate', 'shippingEmail','status','total'];
+  displayedColumns: string[] = [ 'image','id', 'orderDate', 'shippingEmail','status','total','actions'];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator)
   paginator: MatPaginator = new MatPaginator;
   isLoading:boolean=false;
+  http: any;
+  baseUrl= environment.apiUrl;
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit(){
     this.isLoading=true;
@@ -52,4 +57,20 @@ export class OrdersComponent {
     }, 100);
   }
 
+  refundOrder(orderId: number) {
+    this.orderService.refund(orderId).subscribe({
+      next: (response) => {
+        const order = this.dataSource.data.find(o => o.id === orderId);
+        if (order) {
+          order.status = 'Refunded'; 
+        }
+        this.dataSource._updateChangeSubscription(); 
+        this.snackBar.open('Refund successful', 'Close', { duration: 3000 });
+      },
+      error: (err) => {
+        console.error('Refund failed:', err);
+        this.snackBar.open('Refund failed', 'Close', { duration: 3000 });
+      }
+    });
+  }
 }

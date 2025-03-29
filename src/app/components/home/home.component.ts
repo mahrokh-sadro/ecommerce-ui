@@ -5,7 +5,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { Product } from '../../models/product';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { ProductService } from '../../services/product.service';
 
@@ -32,7 +31,6 @@ export class HomeComponent {
   private productService=inject(ProductService);
   types:string[]=[];
   private router=inject(Router);
-  private location=inject(Location);
 
   ngOnInit() {
     this.getProducts();
@@ -46,8 +44,6 @@ export class HomeComponent {
         this.products=data;
         this.bestSeller=this.products.filter(p=>p.isBestSeller);
         this.featured=this.products.filter(p=>p.isFeatured);
-        console.log('bestSeller',this.bestSeller);
-        console.log('featured',this.featured);
         this.isLoading=false;
       },
       error:(error:any)=>{
@@ -70,19 +66,18 @@ export class HomeComponent {
     autoplay: true,
     autoplaySpeed: 3000,
     dots: true,
-    arrows: true,   
+    arrows: false,   
     infinite: true,
     adaptiveHeight: true
   };
   
-  // Slick carousel config for categories
   categoryCarouselConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     adaptiveHeight: true,
     responsive: [
@@ -113,7 +108,7 @@ export class HomeComponent {
     autoplay: true,
     autoplaySpeed: 3000,
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     responsive: [
       {
