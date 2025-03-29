@@ -1,11 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl = "http://localhost:5001/api/";
+  baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   brands:string[]=[];
   types:string[]=[];

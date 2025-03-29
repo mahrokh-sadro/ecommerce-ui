@@ -1,14 +1,15 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable,inject,signal } from '@angular/core';
+import { catchError, map, throwError } from 'rxjs';
 
 import { Address, User } from '../models/user';
-import { catchError, map, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl="http://localhost:5001/api/";
+  baseUrl=environment.apiUrl;
   private http=inject(HttpClient);
   loggedInUser=signal<User|null>(null);
 

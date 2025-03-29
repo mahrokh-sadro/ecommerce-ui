@@ -1,38 +1,30 @@
-<div class="p-6">
-    <h1 class="text-center text-2xl font-semibold mb-4">Filters</h1>
+<div class="p-4">
+    <h1 class="text-center text-xl font-semibold mb-3">Filters</h1>
     <mat-divider></mat-divider>
 
-    <!-- Flex Layout: Ensure Types and Brands are side-by-side, and stack on smaller screens -->
-    <div class="flex flex-col md:flex-row gap-6 mt-6">
-        <!-- Types Section -->
-        <div class="flex-1 space-y-4">
-            <h2 class="text-center text-lg font-medium">Types</h2>
+    <div class="flex flex-col md:flex-row gap-4 mt-4">
+        <div class="flex-1 space-y-2">
+            <h2 class="text-center text-md font-medium">Types</h2>
             <mat-selection-list [(ngModel)]="data.selectedTypes" [multiple]="true" class="w-full">
-                @for (type of data.types; track $index) {
-                    <mat-list-option [value]="type">{{ type }}</mat-list-option>
-                }
+                <mat-list-option *ngFor="let type of data.types" [value]="type">{{ type }}</mat-list-option>
             </mat-selection-list>
         </div>
 
-        <!-- Divider for larger screens -->
         <div class="hidden md:block">
             <mat-divider vertical class="h-auto border-gray-300"></mat-divider>
         </div>
 
-        <!-- Brands Section -->
-        <div class="flex-1 space-y-4">
-            <h2 class="text-center text-lg font-medium">Brands</h2>
+        <div class="flex-1 space-y-2">
+            <h2 class="text-center text-md font-medium">Brands</h2>
             <mat-selection-list [(ngModel)]="data.selectedBrands" [multiple]="true" class="w-full">
-                @for (brand of data.brands; track $index) {
-                    <mat-list-option [value]="brand">{{ brand }}</mat-list-option>
-                }
+                <mat-list-option *ngFor="let brand of data.brands" [value]="brand">{{ brand }}</mat-list-option>
             </mat-selection-list>
         </div>
     </div>
 
-    <div class="flex justify-end mt-6">
+    <div class="flex justify-end mt-4">
         <button mat-flat-button color="primary" (click)="filter()">
             Apply Filters
-        </button>    
+        </button>
     </div>
 </div>

@@ -5,14 +5,15 @@ import { UserService } from './user.service';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, map } from 'rxjs';
 import { Cart } from '../models/cart';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StripeService {
-  baseUrl = "http://localhost:5001/api/";
+  baseUrl = environment.apiUrl;
   private stripePromise: Promise<Stripe | null>;
-  stripePublishableKey="pk_test_51R2FT8GfAmxmqqaWJc8C7LRmWpxd6wgFCIxqWPa4aHCWAbsXvHXqSSwiWpLsheZ4gg1GIxtgSzBJeiB6GdGnxnx000Q0Enkn5m";
+  stripePublishableKey=environment.stripePublishableKey;
   private cartService = inject(CartService);
   private userService = inject(UserService);
   private http = inject(HttpClient);

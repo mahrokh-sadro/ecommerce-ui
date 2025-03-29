@@ -44,7 +44,7 @@ export class CartService {
   }
 
   getCart(id:string){
-    return this.http.get<Cart>("http://localhost:5001/api/cart/"+id).pipe(
+    return this.http.get<Cart>(this.baseUrl + "cart/"+id).pipe(
       map((cart:any)=>{
         this.cart.set(cart);
         return cart;
@@ -53,7 +53,7 @@ export class CartService {
   }
 
   setCart(cart: Cart) {
-    return this.http.post<Cart>("http://localhost:5001/api/cart", cart).pipe(
+    return this.http.post<Cart>(this.baseUrl + "cart", cart).pipe(
       tap(data => {
         console.log('set',data)
         this.cart.set(data);
@@ -131,7 +131,7 @@ export class CartService {
   }
 
   deleteCart() {
-    this.http.delete("http://localhost:5001/api/" + 'cart/' + this.cart()?.id).subscribe({
+    this.http.delete(this.baseUrl + 'cart/' + this.cart()?.id).subscribe({
       next: () => {
         localStorage.removeItem('cartId');
         this.cart.set(null);
