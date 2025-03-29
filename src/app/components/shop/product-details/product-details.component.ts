@@ -74,12 +74,9 @@ export class ProductDetailsComponent {
     addToCart(product: Product, quantity: number) {
       this.cartService.addItemToCart(product, quantity).subscribe(
         (response) => {
-          console.log('Item added to cart successfully', response);
-          // Additional logic after the cart is updated
         },
         (error) => {
           console.error('Error adding item to cart', error);
-          // Handle error if necessary
         }
       );
     }

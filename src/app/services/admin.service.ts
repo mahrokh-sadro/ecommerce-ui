@@ -1,7 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Order } from '../models/Order';
 import { environment } from '../../environments/environment';
-import { data } from 'jquery';
 import { map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

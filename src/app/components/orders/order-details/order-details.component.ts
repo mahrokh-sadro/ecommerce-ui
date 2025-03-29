@@ -26,7 +26,6 @@ export class OrderDetailsComponent {
   ngOnInit(){
     this.isLoading=true;
     this.id=this.route.snapshot.paramMap.get('id');
-    console.log(this.id)
     if(this.id){
       this.orderService.getOrder(+this.id).subscribe({
         next:(data)=>{

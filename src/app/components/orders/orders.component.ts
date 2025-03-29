@@ -41,7 +41,6 @@ export class OrdersComponent {
   ngOnInit(){
     this.isLoading=true;
      this.orderService.getOrders().subscribe(data=>{
-      console.log('myorders',data);
       this.orderService.orders.set(data);
       this.dataSource.data = this.orderService.orders() ?? [];
       setTimeout(() => {

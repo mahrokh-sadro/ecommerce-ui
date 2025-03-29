@@ -74,7 +74,6 @@ export class StripeService {
       if (elements) {
 
         const user = this.userService.loggedInUser();
-        console.log('user',user)
         const _defaultvalues = user?.address
           ? {
               name:user?.firstName + " " + user?.lastName,

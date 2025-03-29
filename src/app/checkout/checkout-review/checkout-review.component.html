@@ -1,7 +1,6 @@
 <div class="p-6 bg-white rounded-lg shadow-md space-y-6 max-w-4xl mx-auto">
     <div class="text-lg font-semibold text-gray-900">Review your order and pay</div>
   
-    <!-- Shipping Address Section -->
     <div class="space-y-2">
       <div class="text-base font-semibold text-gray-800">Shipping Address</div>
       <div class="text-gray-700">
@@ -12,7 +11,6 @@
       <div class="text-gray-700">{{ confirmationToken?.shipping?.address?.postal_code }}</div>
     </div>
   
-    <!-- Payment Method Section -->
     <div class="space-y-2">
       <div class="text-base font-semibold text-gray-800">Payment Method</div>
       <div class="text-gray-700">{{ confirmationToken?.payment_method_preview?.card?.brand }}

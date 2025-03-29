@@ -42,7 +42,6 @@ export class CheckoutService {
       cartItems,
       shippingAddress
     };
-    console.log('shippingAddress',shippingAddress)
     return this.http.post<any>(this.baseUrl+"Payment/order",payload,{withCredentials:true}).pipe(
       map(data=>{
          return data

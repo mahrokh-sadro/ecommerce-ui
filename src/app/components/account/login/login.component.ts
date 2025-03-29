@@ -41,7 +41,6 @@ export class LoginComponent {
   constructor() {
     const url = this.activatedRoute.snapshot.queryParams['returnUrl'];
     if (url) {
-      console.log(url)
       this.returnUrl = url;
     }
   }

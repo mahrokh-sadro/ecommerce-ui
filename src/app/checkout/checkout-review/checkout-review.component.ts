@@ -14,6 +14,5 @@ export class CheckoutReviewComponent {
   cardValue:string="**** **** **** ";
 
   ngonInit(){
-    console.log('--',this.confirmationToken)
   }
 }

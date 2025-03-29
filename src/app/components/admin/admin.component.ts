@@ -39,7 +39,6 @@ export class AdminComponent {
     ngOnInit(){
       this.isLoading=true;
        this.adminService.getOrders().subscribe(data=>{
-        console.log('al orders',data);
         this.dataSource.data = data;
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;

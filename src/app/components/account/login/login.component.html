@@ -2,7 +2,6 @@
     <mat-card class="w-full max-w-md p-6 shadow-lg rounded-lg bg-white">
         <h2 class="text-lg font-semibold text-center mb-6 text-gray-800">Login</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <!-- Email Field -->
             <mat-form-field appearance="fill" class="w-full mb-4">
                 <mat-label class="text-sm font-medium">Email</mat-label>
                 <input type="email" formControlName="email" matInput 
@@ -15,7 +14,6 @@
                 </mat-error>
             </mat-form-field>
 
-            <!-- Password Field -->
             <mat-form-field appearance="fill" class="w-full mb-6">
                 <mat-label class="text-sm font-medium">Password</mat-label>
                 <input type="password" formControlName="password" matInput 
@@ -25,7 +23,6 @@
                 </mat-error>
             </mat-form-field>
 
-            <!-- Login Button -->
             <div class="example-button-row w-full">
                 <button mat-flat-button class="w-full text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 button_color" [disabled]="loginForm.invalid">
                     Login

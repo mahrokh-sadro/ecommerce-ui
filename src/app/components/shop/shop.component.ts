@@ -20,6 +20,7 @@ import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
 import { Cart } from '../../models/cart';
 import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-shop',
@@ -41,7 +42,7 @@ import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 })
 export class ShopComponent {
    
-    baseUrl = "http://localhost:5001/api/";
+    baseUrl = environment.apiUrl;
     private http = inject(HttpClient);
     products?: any;
     types:string[]=[];
@@ -69,7 +70,6 @@ export class ShopComponent {
       this.getBrands();
       this.router.queryParams.subscribe(params => {
         this.category = params['category']?.toLowerCase();
-        console.log(this.category);
         this.getProducts(this.category);
       });
     }
@@ -99,8 +99,6 @@ export class ShopComponent {
           }else{
             this.products=data;
           }
-          console.log( this.products)
-          console.log( 'category',category)
           this.updatePaginatedProducts();
           this.isLoading=false;
         },
@@ -157,7 +155,6 @@ export class ShopComponent {
     }
 
     onSortChange(event:any){
-      console.log(event.options[0].value);
       this.selectedSortValue=event.options[0].value;
       this.productService.getProducts(this.selectedBrands,this.selectedTypes,this.selectedSortValue,this.searchTerm).subscribe({
         next:(response:any)=>{

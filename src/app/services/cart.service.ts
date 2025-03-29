@@ -55,7 +55,6 @@ export class CartService {
   setCart(cart: Cart) {
     return this.http.post<Cart>(this.baseUrl + "cart", cart).pipe(
       tap(data => {
-        console.log('set',data)
         this.cart.set(data);
       })
     );

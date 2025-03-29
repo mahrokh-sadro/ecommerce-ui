@@ -16,7 +16,6 @@ export class UserService {
   constructor() { }
 
   login(values:any){
-    console.log('values',values)
     let params = new HttpParams().set('useCookies', 'true');
     return this.http.post<User>(this.baseUrl+'login?',values,{params,withCredentials:true});
   }

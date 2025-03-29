@@ -33,7 +33,6 @@ export class DeliveryComponent {
         }
         else{
           this.cartService.selectedDeliveryMethod.set(methods[3]);
-          console.log('set Method',this.cartService.selectedDeliveryMethod())
         }
       }
     }); 

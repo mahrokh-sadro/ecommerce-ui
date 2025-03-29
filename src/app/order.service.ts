@@ -14,7 +14,6 @@ export class OrderService {
   getOrders(){
     return this.http.get<Order[]>(this.baseUrl+"payment/orders",{withCredentials:true}).pipe(
       map(data=>{
-        console.log('data',data)
         return data
       })
     )
@@ -23,7 +22,6 @@ export class OrderService {
   getOrder(orderId:number){
     return this,this.http.get<any>(this.baseUrl+"payment/"+orderId).pipe(
       map(data=>{
-        console.log('order',data);
         return data;
       })
     )

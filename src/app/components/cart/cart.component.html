@@ -1,19 +1,19 @@
 @if(cartService.cart()?.cartItems?.length! > 0) {
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 ml-6">
-    <div class="col-span-2 flex flex-col gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 ml-6 mb-8">
+    <div class="col-span-2 flex flex-col gap-6" style="max-height: 800px;overflow-y: scroll;">
       <div *ngFor="let item of cartService.cart()?.cartItems">
         <mat-card appearance="outlined" class="shadow-md rounded-lg border border-gray-200">
           <mat-card-header class="px-4 py-3 bg-gray-300 " 
             style="height: 50px;border-top-left-radius: 11px;border-top-right-radius: 11px;">
-            <!-- Empty header -->
           </mat-card-header>  
-
           <mat-card-content class="mt-2">
             <div class="grid grid-cols-6 gap-4 items-center">
               <div class="col-span-1">
-                <img class="w-24 h-24 object-cover rounded-lg" 
+                <a [routerLink]="['/products', item.productId]">
+                  <img class="w-24 h-24 object-cover rounded-lg" 
                      src="{{'images/'+item.image}}" 
                      alt="{{ item.name }}">
+                </a>
               </div>
   
               <div class="col-span-5 flex items-center justify-between w-full">
@@ -37,7 +37,7 @@
                     </button>
                   </div>
   
-                  <button mat-button color="warn" (click)="removeItem(item)" class="flex items-center gap-2">
+                  <button mat-button color="warn" (click)="removeItem(item)" class="flex items-center gap-2 cursor-pointer">
                     <mat-icon class="text-red-600 !text-red-600">delete</mat-icon>
                     <span>Delete</span>
                   </button>

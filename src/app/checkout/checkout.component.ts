@@ -64,19 +64,15 @@ export class CheckoutComponent {
     this.paymentElement=await this.stripeService.createPaymentElement();
     this.paymentElement.mount('#payment-element');
 
-     // listen for address changes
     this.addressElement.on('change', (event: StripeAddressElementChangeEvent) => {
     if (event.complete) {
-        console.log('Address details:', event.value);
         this.addressData=event.value;
         this.status.address=event.complete;
       }
     });
 
-     //listen for payment element
      this.paymentElement.on('change', (event: StripePaymentElementChangeEvent) => {
       if (event.complete) {
-        console.log('Payment details:', event.value);
         this.status.payment = event.complete;  
       }
     });
@@ -96,17 +92,6 @@ export class CheckoutComponent {
           country: this.addressData?.address?.country
         };
 
-        console.log('addressData', this.addressData);
-        console.log('address', address);
-        // Save address to the backend
-        // this.userService.updateAddress(address).subscribe({
-        //   next: (response) => {
-        //     console.log('Address saved successfully:', response);
-        //   },
-        //   error: (error) => {
-        //     console.error('Error saving address:', error);
-        //   }
-        // });
       } else {
         console.error('Address data is not available');
       }
@@ -128,11 +113,6 @@ export class CheckoutComponent {
         const result = await this.stripeService.createConfirmationToken();
         if (result.error) throw new Error(result.error.message);
         this.confirmationToken = result.confirmationToken;
-
-        console.log('confirmationToken',this.confirmationToken);
-        console.log('user' ,this.userService.loggedInUser() );
-        console.log('cart' ,this.cartService.cart() );
-
       }
     } catch (error: any) {
       console.log(error.message);
@@ -173,7 +153,6 @@ export class CheckoutComponent {
 
             this.checkoutService.createOrder(payment,billingDetails,cartItems!,this.addressData).subscribe({
                next:data=>{
-                 console.log(data);
                  this.router.navigateByUrl(`/checkout/success?orderId=${data.id}&total=${data.total}`);
 
                }
