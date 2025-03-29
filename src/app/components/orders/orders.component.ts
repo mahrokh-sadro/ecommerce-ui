@@ -4,7 +4,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-
 import { OrderService } from '../../order.service';
 import { MatCardModule } from '@angular/material/card';
 import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
@@ -21,7 +20,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     RouterLink,
     MatTableModule,
     MatPaginatorModule,
-    LoadingIconComponent
+    LoadingIconComponent,
+    CommonModule
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
