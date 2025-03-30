@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Order } from './models/Order';
 import { map } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  baseUrl = "http://localhost:5001/api/";
+  baseUrl = environment.apiUrl;
   private http=inject(HttpClient);
   orders=signal<any[] | null>(null);
 
