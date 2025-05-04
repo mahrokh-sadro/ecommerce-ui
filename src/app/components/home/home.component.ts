@@ -1,63 +1,73 @@
 import { Component, inject } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CommonModule, NgFor } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { Product } from '../../models/product';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { LoadingIconComponent } from '../../components/loading-icon/loading-icon.component';
 
 import { ProductService } from '../../services/product.service';
-
 
 @Component({
   selector: 'app-home',
   imports: [
     SlickCarouselModule,
     CommonModule,
-    NgFor ,
+    NgFor,
     MatButtonModule,
     RouterLink,
-    
+    LoadingIconComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-
-  products:Product[]=[];
-  bestSeller:Product[]=[];
-  featured:Product[]=[];
-  isLoading:boolean=false;
-  private productService=inject(ProductService);
-  types:string[]=[];
-  private router=inject(Router);
+  products: Product[] = [];
+  bestSeller: Product[] = [];
+  featured: Product[] = [];
+  isLoading: boolean = false;
+  private productService = inject(ProductService);
+  types: string[] = [];
+  private router = inject(Router);
 
   ngOnInit() {
     this.getProducts();
     this.getTypes();
   }
 
-  getProducts(){
-    this.isLoading=true;
+  getProducts() {
+    this.isLoading = true;
     this.productService.getProducts().subscribe({
-      next:(data:any)=>{
-        this.products=data;
-        this.bestSeller=this.products.filter(p=>p.isBestSeller);
-        this.featured=this.products.filter(p=>p.isFeatured);
-        this.isLoading=false;
+      next: (data: any) => {
+        this.products = data;
+        this.bestSeller = this.products.filter((p) => p.isBestSeller);
+        this.featured = this.products.filter((p) => p.isFeatured);
+        this.isLoading = false;
       },
-      error:(error:any)=>{
+      error: (error: any) => {
         console.log(error);
-        this.isLoading=false;
-      }
-    })
+        this.isLoading = false;
+      },
+    });
   }
 
-
   banners = [
-    { image: 'images/banner1.jpg', name: 'Tech Product 1', description: 'This is a description of product 1' },
-    { image: 'images/banner2.jpg', name: 'Tech Product 2', description: 'This is a description of product 2' },
-    { image: 'images/banner3.jpg', name: 'Tech Product 3', description: 'This is a description of product 3' }
+    {
+      image: 'images/banner1.jpg',
+      name: 'Tech Product 1',
+      description: 'This is a description of product 1',
+    },
+    {
+      image: 'images/banner2.jpg',
+      name: 'Tech Product 2',
+      description: 'This is a description of product 2',
+    },
+    {
+      image: 'images/banner3.jpg',
+      name: 'Tech Product 3',
+      description: 'This is a description of product 3',
+    },
   ];
 
   slideConfig = {
@@ -66,11 +76,11 @@ export class HomeComponent {
     autoplay: true,
     autoplaySpeed: 3000,
     dots: true,
-    arrows: false,   
+    arrows: false,
     infinite: true,
-    adaptiveHeight: true
+    adaptiveHeight: true,
   };
-  
+
   categoryCarouselConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -114,27 +124,27 @@ export class HomeComponent {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2
-        }
+          slidesToShow: 2,
+        },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   getTypes() {
     this.productService.getTypes()?.subscribe({
-      next:(data:any)=>{
-        this.types=data.map((type:string)=>type.toLowerCase());
+      next: (data: any) => {
+        this.types = data.map((type: string) => type.toLowerCase());
       },
-    })
+    });
   }
 
-  redirectToCategory(category:string){
+  redirectToCategory(category: string) {
     this.router.navigateByUrl(`/products?category=${category}`);
   }
 }
